@@ -1,0 +1,5 @@
+package org.firstinspires.ftc.teamcode;
+
+public class VuforiaKey {
+    public static String key = "Ab0UcgH/////AAABmeFuNnn/QUf3gcMi7PRkFhIRk7YIHWU4YYO2vxHeYI3rQZRyfN3AOAw06n0Nezb1xvIfWo6UPfOpOz4objWiJnz0Pc1uyFHxaXjOD3yF+Pjgc7G9TRTtjuVV3unCjjFT6CGaWTWGYw6BTlTkbxorT3ZndX1i07RYHivi4zvPMbgZIsVginCwu0K6XxSHCVNB/a4KRkalhfe20tOXBsEBbNsrYkG9Mwps3I5njg4URloIiG+/k40YdDr6bpPhQPpmCARruzUNO7fQmR+TPPD+hV8zBjDrjN8ABWMnKK37DIMdRfxwO0AHOWVZ5iJs+qR+1K65XxYZen9OmTLDsiHlltiulxlloMU2NVy66V49UqTB";
+}
