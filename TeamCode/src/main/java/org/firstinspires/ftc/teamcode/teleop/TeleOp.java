@@ -24,7 +24,7 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
         hdw.createHardware();
 
         mecanumWheels = new MecanumWheels();
-        telemetry.addData(">", "All set?"); //manda un mensaje a la driver station
+        telemetry.addData("[>]", "All set?"); //manda un mensaje a la driver station
         telemetry.update();
 
         waitForStart(); //espera hasta que se presione <play> en la driver station
@@ -35,7 +35,7 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
         while(opModeIsActive()){
 
             if(System.currentTimeMillis() < disappearmillis) { //se ejecuta cuando no hayan pasado mas de 3 segundos (3000 ms) desde que se dio a <play>
-                telemetry.addData(">", "GO!!!");
+                telemetry.addData("[>]", "GO!!!");
             }
 
             startA(); //movimientos del start A
@@ -90,16 +90,18 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
 
         //articulacion de la garra
         if (gamepad2.x) {
-            hdw.motorArtiClaw.setPower(-0.1);
+            hdw.motorArtiClaw.setPower(-0.25);
         } else if (gamepad2.y) {
-            hdw.motorArtiClaw.setPower(0.1);
+            hdw.motorArtiClaw.setPower(0.25);
+        }else{
+            hdw.motorArtiClaw.setPower(0);
         }
 
         //lift de la articulacion de la garra
         if(gamepad2.dpad_up){
-            hdw.motorLift.setPower(0.25);
+            hdw.motorLift.setPower(1);
         }else if(gamepad2.dpad_down){
-            hdw.motorLift.setPower(-0.25);
+            hdw.motorLift.setPower(-1);
         }else{
             hdw.motorLift.setPower(0);
         }
