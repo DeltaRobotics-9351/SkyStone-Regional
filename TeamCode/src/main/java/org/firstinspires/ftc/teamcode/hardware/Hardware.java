@@ -74,7 +74,7 @@ public class Hardware {
         wheelFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         wheelBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         wheelBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorArtiClaw.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorArtiClaw.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 

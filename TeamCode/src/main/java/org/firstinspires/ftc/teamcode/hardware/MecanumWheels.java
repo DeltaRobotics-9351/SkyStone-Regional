@@ -15,8 +15,8 @@ public class MecanumWheels {
     public MecanumWheels(){ }
 
     public void joystick(Gamepad gamepad1, double speed){
-        double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
-        double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
+        double r = Math.hypot(gamepad1.right_stick_x, gamepad1.left_stick_y);
+        double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.right_stick_x) - Math.PI / 4;
         double rightX = -gamepad1.right_stick_y;
         wheelFrontLeftPower = (r * Math.cos(robotAngle) + rightX) / speed;
         wheelFrontRightPower = (r * Math.sin(robotAngle) - rightX) / speed;

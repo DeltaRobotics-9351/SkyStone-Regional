@@ -30,7 +30,7 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
         waitForStart(); //espera hasta que se presione <play> en la driver station
 
         runmillis = System.currentTimeMillis();
-        disappearmillis = runmillis + (3 * 1000); //el tiempo en el que desaparecera el mensaje "GO!!!"
+        disappearmillis = runmillis + (5 * 1000); //el tiempo en el que desaparecera el mensaje "GO!!!"
 
         while(opModeIsActive()){
 
@@ -89,10 +89,10 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
         }
 
         //articulacion de la garra
-        if (gamepad2.x) {
-            hdw.motorArtiClaw.setPower(-0.25);
-        } else if (gamepad2.y) {
-            hdw.motorArtiClaw.setPower(0.25);
+        if (gamepad2.left_trigger > 0.1) {
+            hdw.motorArtiClaw.setPower(-0.1);
+        } else if (gamepad2.right_trigger > 0.1) {
+            hdw.motorArtiClaw.setPower(0.1);
         }else{
             hdw.motorArtiClaw.setPower(0);
         }
@@ -106,6 +106,8 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
             hdw.motorLift.setPower(0);
         }
 
+        telemetry.addData("hola", gamepad2.left_trigger + ", " + gamepad2.right_trigger );
+        telemetry.addData("motorLift", hdw.motorLift.getPower());
 
     }
 
