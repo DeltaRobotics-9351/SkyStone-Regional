@@ -45,6 +45,7 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
             telemetry.addData("wheelFrontLeftPower", mecanumWheels.wheelFrontLeftPower);
             telemetry.addData("wheelBackRightPower", mecanumWheels.wheelBackRightPower);
             telemetry.addData("wheelBackLeftPower", mecanumWheels.wheelBackLeftPower);
+            telemetry.addData("speed", mecanumWheels.speed);
             telemetry.addLine().addData("servoFoundationRight", hdw.servoFoundationRight.getPosition());
             telemetry.addData("servoFoundationLeft", hdw.servoFoundationLeft.getPosition());
             telemetry.addData("servoClaw", hdw.servoClaw.getPosition());
@@ -64,8 +65,8 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
         //si cualquiera de los 2 triggers es presionado (mayor que 0), el robot avanzara a la mitad
         //de velocidad. el fin de esto es para que el arrastrar la foundation en el endgame no sea
         //tan arriesgado y haya menos probabilidad de que tiremos cualquier stone
-        if (gamepad1.left_trigger > 0 || gamepad1.right_trigger > 0) {
-            mecanumWheels.joystick(gamepad1, 0.5);
+        if (gamepad1.b) {
+            mecanumWheels.joystick(gamepad1, 0.25);
         } else {
             mecanumWheels.joystick(gamepad1, 1);
         }
@@ -90,11 +91,11 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
 
         //articulacion de la garra
         if (gamepad2.left_trigger > 0.1) {
-            hdw.motorArtiClaw.setPower(-0.1);
+            //hdw.motorArtiClaw.setPower(-0.1);
         } else if (gamepad2.right_trigger > 0.1) {
-            hdw.motorArtiClaw.setPower(0.1);
+            //hdw.motorArtiClaw.setPower(0.1);
         }else{
-            hdw.motorArtiClaw.setPower(0);
+            //hdw.motorArtiClaw.setPower(0);
         }
 
         //lift de la articulacion de la garra

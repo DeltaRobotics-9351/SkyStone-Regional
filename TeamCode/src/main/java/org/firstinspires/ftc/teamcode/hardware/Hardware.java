@@ -42,7 +42,7 @@ public class Hardware {
         servoFoundationLeft = hwMap.get(Servo.class, "servoFoundationLeft");
         servoFoundationRight = hwMap.get(Servo.class, "servoFoundationRight");
         servoClaw = hwMap.get(Servo.class, "servoClaw");
-        motorArtiClaw = hwMap.get(DcMotor.class, "motorArtiClaw");
+        //motorArtiClaw = hwMap.get(DcMotor.class, "motorArtiClaw");
         motorLift = hwMap.get(DcMotor.class, "motorLift");
 
         //La direccion por default de estos motores/servos sera FORWARD
@@ -51,7 +51,7 @@ public class Hardware {
         wheelBackLeft.setDirection(DcMotor.Direction.FORWARD);
         wheelFrontLeft.setDirection(DcMotor.Direction.FORWARD);
         //La direccion por default de estos motores sera REVERSE
-        motorArtiClaw.setDirection(DcMotor.Direction.REVERSE);
+        //motorArtiClaw.setDirection(DcMotor.Direction.REVERSE);
         motorLift.setDirection(DcMotor.Direction.REVERSE);
 
         //el power de todos los motores se define a 0
@@ -59,7 +59,7 @@ public class Hardware {
         wheelBackRight.setPower(0);
         wheelFrontLeft.setPower(0);
         wheelBackLeft.setPower(0);
-        motorArtiClaw.setPower(0);
+        //motorArtiClaw.setPower(0);
         motorLift.setPower(0);
 
         //estos motores frenaran si su power es 0
