@@ -63,7 +63,7 @@ public class Hardware {
         motorLift.setPower(0);
 
         //estos motores frenaran si su power es 0
-        motorArtiClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //motorArtiClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         
         //se define la posicion por default de estos servos
         servoFoundationLeft.setPosition(0);
@@ -74,7 +74,7 @@ public class Hardware {
         wheelFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         wheelBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         wheelBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorArtiClaw.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //motorArtiClaw.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
