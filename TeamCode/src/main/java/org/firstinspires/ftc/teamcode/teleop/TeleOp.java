@@ -41,20 +41,20 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
             startA(); //movimientos del start A
             startB();//movimientos del start B
 
-            telemetry.addData("wheelFrontRightPower", mecanumWheels.wheelFrontRightPower);
-            telemetry.addData("wheelFrontLeftPower", mecanumWheels.wheelFrontLeftPower);
-            telemetry.addData("wheelBackRightPower", mecanumWheels.wheelBackRightPower);
-            telemetry.addData("wheelBackLeftPower", mecanumWheels.wheelBackLeftPower);
+            telemetry.addData("wheelFrontRightPower", mecanumWheels.wheelFrontRightPower / mecanumWheels.speed);
+            telemetry.addData("wheelFrontLeftPower", mecanumWheels.wheelFrontLeftPower / mecanumWheels.speed);
+            telemetry.addData("wheelBackRightPower", mecanumWheels.wheelBackRightPower / mecanumWheels.speed);
+            telemetry.addData("wheelBackLeftPower", mecanumWheels.wheelBackLeftPower / mecanumWheels.speed);
             telemetry.addData("speed", mecanumWheels.speed);
             telemetry.addLine().addData("servoFoundationRight", hdw.servoFoundationRight.getPosition());
             telemetry.addData("servoFoundationLeft", hdw.servoFoundationLeft.getPosition());
             telemetry.addData("servoClaw", hdw.servoClaw.getPosition());
 
             //set power de los motores
-            hdw.wheelFrontRight.setPower(mecanumWheels.wheelFrontRightPower);
-            hdw.wheelFrontLeft.setPower(mecanumWheels.wheelFrontLeftPower);
-            hdw.wheelBackRight.setPower(mecanumWheels.wheelBackRightPower);
-            hdw.wheelBackLeft.setPower(mecanumWheels.wheelBackLeftPower);
+            hdw.wheelFrontRight.setPower(mecanumWheels.wheelFrontRightPower / mecanumWheels.speed);
+            hdw.wheelFrontLeft.setPower(mecanumWheels.wheelFrontLeftPower / mecanumWheels.speed);
+            hdw.wheelBackRight.setPower(mecanumWheels.wheelBackRightPower / mecanumWheels.speed);
+            hdw.wheelBackLeft.setPower(mecanumWheels.wheelBackLeftPower / mecanumWheels.speed);
 
             telemetry.update();  //manda los mensajes telemetry a la driver station
         }

@@ -21,13 +21,14 @@ public class MecanumWheels {
         double r = Math.hypot(gamepad1.right_stick_x, gamepad1.left_stick_x);
         double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.right_stick_x) - Math.PI / 4;
         double rightX = -gamepad1.right_stick_y;
-        wheelFrontLeftPower = (r * Math.cos(robotAngle) + rightX) / speed;
-        wheelFrontRightPower = (r * Math.sin(robotAngle) - rightX) / speed;
-        wheelBackLeftPower = (r * Math.sin(robotAngle) + rightX) / speed;
-        wheelBackRightPower = (r * Math.cos(robotAngle) - rightX) / speed;
+        wheelFrontLeftPower = (r * Math.cos(robotAngle) + rightX);
+        wheelFrontRightPower = (r * Math.sin(robotAngle) - rightX);
+        wheelBackLeftPower = (r * Math.sin(robotAngle) + rightX);
+        wheelBackRightPower = (r * Math.cos(robotAngle) - rightX);
     }
 
     public void forward(double speed){
+        this.speed = speed;
         wheelFrontRightPower = 1 / speed;
         wheelFrontLeftPower = 1 / speed;
         wheelBackRightPower = 1 / speed;
@@ -35,6 +36,7 @@ public class MecanumWheels {
     }
 
     public void backwards(double speed){
+        this.speed = speed;
         wheelFrontRightPower = -1 / speed;
         wheelFrontLeftPower = -1 / speed;
         wheelBackRightPower = -1 / speed;
@@ -42,6 +44,7 @@ public class MecanumWheels {
     }
 
     public void strafeRight(double speed){
+        this.speed = speed;
         wheelFrontRightPower = -1 / speed;
         wheelFrontLeftPower = 1 / speed;
         wheelBackRightPower = 1 / speed;
@@ -49,6 +52,7 @@ public class MecanumWheels {
     }
 
     public void strafeLeft(double speed){
+        this.speed = speed;
         wheelFrontRightPower = 1 / speed;
         wheelFrontLeftPower = -1 / speed;
         wheelBackRightPower = -1 / speed;
@@ -56,6 +60,7 @@ public class MecanumWheels {
     }
 
     public void turnRight(double speed){
+        this.speed = speed;
         wheelFrontRightPower = -1 / speed;
         wheelFrontLeftPower = 1 / speed;
         wheelBackRightPower = -1 / speed;
@@ -63,6 +68,7 @@ public class MecanumWheels {
     }
 
     public void turnLeft(double speed){
+        this.speed = speed;
         wheelFrontRightPower = 1 / speed;
         wheelFrontLeftPower = -1 / speed;
         wheelBackRightPower = 1 / speed;
@@ -70,6 +76,7 @@ public class MecanumWheels {
     }
 
     public void tiltRight(double speed){
+        this.speed = speed;
         wheelFrontLeftPower = 1 / speed;
         wheelFrontRightPower = 0;
         wheelBackRightPower = 1 / speed;
@@ -77,6 +84,7 @@ public class MecanumWheels {
     }
 
     public void tiltLeft(double speed){
+        this.speed = speed;
         wheelBackLeftPower = 1 / speed;
         wheelBackRightPower = 0;
         wheelFrontRightPower = 1 / speed;
@@ -84,6 +92,7 @@ public class MecanumWheels {
     }
 
     public void stop(){
+        this.speed = speed;
         wheelBackLeftPower = 0;
         wheelBackRightPower = 0;
         wheelFrontRightPower = 0;
