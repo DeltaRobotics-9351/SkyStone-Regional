@@ -65,8 +65,8 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
         //si cualquiera de los 2 triggers es presionado (mayor que 0), el robot avanzara a la mitad
         //de velocidad. el fin de esto es para que el arrastrar la foundation en el endgame no sea
         //tan arriesgado y haya menos probabilidad de que tiremos cualquier stone
-        if (gamepad1.b) {
-            mecanumWheels.joystick(gamepad1, 0.25);
+        if (gamepad1.left_trigger > 0.2 || gamepad1.right_trigger > 0.2) {
+            mecanumWheels.joystick(gamepad1, 0.05);
         } else {
             mecanumWheels.joystick(gamepad1, 1);
         }
@@ -82,23 +82,19 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
     }
 
     public void startB() {
-        //servo de la garra
+        //intake
         if (gamepad2.a) {
-            hdw.servoClaw.setPosition(1);
+            hdw.motorIntakeLeft.setPower(1);
+            hdw.motorIntakeRight.setPower(-1);
         } else if (gamepad2.b) {
-            hdw.servoClaw.setPosition(0);
-        }
-
-        //articulacion de la garra
-        if (gamepad2.left_trigger > 0.1) {
-            //hdw.motorArtiClaw.setPower(-0.1);
-        } else if (gamepad2.right_trigger > 0.1) {
-            //hdw.motorArtiClaw.setPower(0.1);
+            hdw.motorIntakeLeft.setPower(-1);
+            hdw.motorIntakeRight.setPower(1);
         }else{
-            //hdw.motorArtiClaw.setPower(0);
+            hdw.motorIntakeLeft.setPower(0);
+            hdw.motorIntakeRight.setPower(0);
         }
 
-        //lift de la articulacion de la garra
+        //lift del intake
         if(gamepad2.dpad_up){
             hdw.motorLift.setPower(1);
         }else if(gamepad2.dpad_down){
@@ -107,7 +103,6 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
             hdw.motorLift.setPower(0);
         }
 
-        telemetry.addData("hola", gamepad2.left_trigger + ", " + gamepad2.right_trigger );
         telemetry.addData("motorLift", hdw.motorLift.getPower());
 
     }

@@ -21,7 +21,8 @@ public class Hardware {
     public DcMotor wheelBackLeft = null;
 
     //otros motores
-    public DcMotor motorArtiClaw = null;
+    public DcMotor motorIntakeLeft = null;
+    public DcMotor motorIntakeRight = null;
     public DcMotor motorLift = null;
 
     //servos
@@ -42,7 +43,8 @@ public class Hardware {
         servoFoundationLeft = hwMap.get(Servo.class, "servoFoundationLeft");
         servoFoundationRight = hwMap.get(Servo.class, "servoFoundationRight");
         servoClaw = hwMap.get(Servo.class, "servoClaw");
-        //motorArtiClaw = hwMap.get(DcMotor.class, "motorArtiClaw");
+        motorIntakeLeft = hwMap.get(DcMotor.class, "motorIntakeLeft");
+        motorIntakeRight = hwMap.get(DcMotor.class, "motorIntakeRight");
         motorLift = hwMap.get(DcMotor.class, "motorLift");
 
         //La direccion por default de estos motores/servos sera FORWARD
@@ -51,7 +53,8 @@ public class Hardware {
         wheelBackLeft.setDirection(DcMotor.Direction.FORWARD);
         wheelFrontLeft.setDirection(DcMotor.Direction.FORWARD);
         //La direccion por default de estos motores sera REVERSE
-        //motorArtiClaw.setDirection(DcMotor.Direction.REVERSE);
+        motorIntakeLeft.setDirection(DcMotor.Direction.REVERSE);
+        motorIntakeRight.setDirection(DcMotor.Direction.REVERSE);
         motorLift.setDirection(DcMotor.Direction.REVERSE);
 
         //el power de todos los motores se define a 0
@@ -59,7 +62,8 @@ public class Hardware {
         wheelBackRight.setPower(0);
         wheelFrontLeft.setPower(0);
         wheelBackLeft.setPower(0);
-        //motorArtiClaw.setPower(0);
+        motorIntakeLeft.setPower(0);
+        motorIntakeRight.setPower(0);
         motorLift.setPower(0);
 
         //estos motores frenaran si su power es 0
@@ -74,7 +78,8 @@ public class Hardware {
         wheelFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         wheelBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         wheelBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //motorArtiClaw.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorIntakeLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorIntakeRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 

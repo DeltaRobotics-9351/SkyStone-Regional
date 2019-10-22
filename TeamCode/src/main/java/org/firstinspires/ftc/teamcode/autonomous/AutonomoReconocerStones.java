@@ -90,7 +90,7 @@ public class AutonomoReconocerStones extends LinearOpMode {
             telemetry.addData(">", "Ow! Este dispositivo no es compatible con TensorFlow Lite!");
         }
 
-        //activamos la camara de deteccion de objetos antes de que empieze el opmode
+        //activamos la camara de deteccion de objetos antes de que empiece el opmode
         if (tfod != null) {
             tfod.activate();
         }
