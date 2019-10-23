@@ -56,8 +56,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-@Autonomous(name = "Autonomo Reconocer Stones", group = "Autonomos")
-public class AutonomoReconocerStones extends LinearOpMode {
+@Autonomous(name = "Autonomo TensorFlow", group = "Autonomos")
+public class AutonomoTensorflow extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "Skystone.tflite";
     private static final String LABEL_STONE = "Stone";
     private static final String LABEL_SKYSTONE = "Skystone";

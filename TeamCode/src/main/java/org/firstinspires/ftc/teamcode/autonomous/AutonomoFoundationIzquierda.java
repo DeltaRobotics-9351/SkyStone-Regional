@@ -56,13 +56,14 @@ public class AutonomoFoundationIzquierda extends LinearOpMode {
 
         telemetry.addData("[>]", "El bias actual es " + bias);
         telemetry.addData("[>]", "El meccyBias actual es " + meccyBias);
+        telemetry.update();
 
         waitForStart();
 
-        moveToPosition(26.6, 0.2);
-        moveToPosition(-26.6, 0.2);
-        strafeToPosition(-55.4, 0.2);
-        moveToPosition(24, 0.2);
+        moveToPosition(26.2, 0.2);
+        moveToPosition(-26, 0.2);
+        strafeToPosition(-45.6, 0.2);
+        moveToPosition(25, 0.2);
     }
 
     /*

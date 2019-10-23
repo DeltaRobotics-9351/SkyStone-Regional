@@ -21,11 +21,11 @@ public class AutonomoDogeCV extends LinearOpMode {
     public void runOpMode() {
         //creamos la vista desde el celular de la camara
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+
         //creamos la camara de OpenCV
         phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
 
-
-        //abrimos la camara trasera del dipositivo
+        //la inicializamos
         phoneCam.openCameraDevice();
 
         //creamos el detector de skystones
@@ -33,7 +33,7 @@ public class AutonomoDogeCV extends LinearOpMode {
         phoneCam.setPipeline(skyStoneDetector); //definimos que la pipeline sera el skystonedetector
                                                 //es decir, los frames iran hacia este.
 
-        //empezamos a trasmitir/stremear la camara del celular trasera
+        //empezamos a trasmitir la camara del celular trasera a la pantalla del robot controller
         phoneCam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
 
         //esperamos que el usuario presione <play> en la driver station

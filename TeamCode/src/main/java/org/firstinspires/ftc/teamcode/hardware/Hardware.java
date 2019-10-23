@@ -25,27 +25,19 @@ public class Hardware {
     public DcMotor motorIntakeRight = null;
     public DcMotor motorLift = null;
 
-    //servos
-    public Servo servoFoundationLeft = null;
-    public Servo servoFoundationRight = null;
-    public Servo servoClaw = null;
-
     //sensores
     //public ColorSensor colorSensor = null; (ejemplo)
 
     public void createHardware(){
 
         //se obtienen todos los motores, servos y sensores del hardwaremap dado
-        wheelFrontRight = hwMap.get(DcMotor.class, "wheelFrontRight");
-        wheelFrontLeft = hwMap.get(DcMotor.class, "wheelFrontLeft");
-        wheelBackRight = hwMap.get(DcMotor.class, "wheelBackRight");
-        wheelBackLeft = hwMap.get(DcMotor.class, "wheelBackLeft");
-        servoFoundationLeft = hwMap.get(Servo.class, "servoFoundationLeft");
-        servoFoundationRight = hwMap.get(Servo.class, "servoFoundationRight");
-        servoClaw = hwMap.get(Servo.class, "servoClaw");
-        motorIntakeLeft = hwMap.get(DcMotor.class, "motorIntakeLeft");
-        motorIntakeRight = hwMap.get(DcMotor.class, "motorIntakeRight");
-        motorLift = hwMap.get(DcMotor.class, "motorLift");
+        wheelFrontRight = hwMap.get(DcMotor.class, "fr");
+        wheelFrontLeft = hwMap.get(DcMotor.class, "fl");
+        wheelBackRight = hwMap.get(DcMotor.class, "br");
+        wheelBackLeft = hwMap.get(DcMotor.class, "bl");
+        motorIntakeLeft = hwMap.get(DcMotor.class, "inl");
+        motorIntakeRight = hwMap.get(DcMotor.class, "inr");
+        motorLift = hwMap.get(DcMotor.class, "lift");
 
         //La direccion por default de estos motores/servos sera FORWARD
         wheelFrontRight.setDirection(DcMotor.Direction.FORWARD);
@@ -70,8 +62,6 @@ public class Hardware {
         //motorArtiClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         
         //se define la posicion por default de estos servos
-        servoFoundationLeft.setPosition(0);
-        servoFoundationRight.setPosition(0);
 
         //definimos los motores que correran con y sin encoders 
         wheelFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

@@ -46,9 +46,6 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
             telemetry.addData("wheelBackRightPower", mecanumWheels.wheelBackRightPower / mecanumWheels.speed);
             telemetry.addData("wheelBackLeftPower", mecanumWheels.wheelBackLeftPower / mecanumWheels.speed);
             telemetry.addData("speed", mecanumWheels.speed);
-            telemetry.addLine().addData("servoFoundationRight", hdw.servoFoundationRight.getPosition());
-            telemetry.addData("servoFoundationLeft", hdw.servoFoundationLeft.getPosition());
-            telemetry.addData("servoClaw", hdw.servoClaw.getPosition());
 
             //set power de los motores
             hdw.wheelFrontRight.setPower(mecanumWheels.wheelFrontRightPower / mecanumWheels.speed);
@@ -71,14 +68,6 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
             mecanumWheels.joystick(gamepad1, 1);
         }
 
-        //servos con perfil que agarraran la foundation para arrastrarla
-        if(gamepad1.dpad_up){
-            hdw.servoFoundationRight.setPosition(0);    
-            hdw.servoFoundationLeft.setPosition(0);      
-        }else if(gamepad1.dpad_down){
-            hdw.servoFoundationRight.setPosition(1);
-            hdw.servoFoundationLeft.setPosition(1);
-        }
     }
 
     public void startB() {
