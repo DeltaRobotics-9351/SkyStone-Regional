@@ -74,10 +74,10 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
         //intake
         if (gamepad2.a) {
             hdw.motorIntakeLeft.setPower(1);
-            hdw.motorIntakeRight.setPower(-1);
+            hdw.motorIntakeRight.setPower(1);
         } else if (gamepad2.b) {
             hdw.motorIntakeLeft.setPower(-1);
-            hdw.motorIntakeRight.setPower(1);
+            hdw.motorIntakeRight.setPower(-1);
         }else{
             hdw.motorIntakeLeft.setPower(0);
             hdw.motorIntakeRight.setPower(0);
