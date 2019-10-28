@@ -84,15 +84,22 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
         }
 
         //lift del intake
-        if(gamepad2.dpad_up){
-            hdw.motorLift.setPower(1);
-        }else if(gamepad2.dpad_down){
-            hdw.motorLift.setPower(-1);
+        if(gamepad2.right_trigger > 0.1) {
+            hdw.motorLift.setPower(gamepad2.right_trigger);
+        }else if(gamepad2.left_trigger > 0.1){
+            hdw.motorLift.setPower(-gamepad2.left_trigger);
         }else{
             hdw.motorLift.setPower(0);
         }
 
-        telemetry.addData("motorLift", hdw.motorLift.getPower());
+        //articulacion del intake
+        if(gamepad2.dpad_up){
+            hdw.motorArtiIntake.setPower(0.01);
+        }else if(gamepad2.dpad_down){
+            hdw.motorArtiIntake.setPower(-0.01);
+        }else{
+            hdw.motorArtiIntake.setPower(0);
+        }
 
     }
 

@@ -24,6 +24,7 @@ public class Hardware {
     public DcMotor motorIntakeLeft = null;
     public DcMotor motorIntakeRight = null;
     public DcMotor motorLift = null;
+    public DcMotor motorArtiIntake = null;
 
     //sensores
     //public ColorSensor colorSensor = null; (ejemplo)
@@ -38,14 +39,16 @@ public class Hardware {
         motorIntakeLeft = hwMap.get(DcMotor.class, "inl");
         motorIntakeRight = hwMap.get(DcMotor.class, "inr");
         motorLift = hwMap.get(DcMotor.class, "lift");
+        motorArtiIntake = hwMap.get(DcMotor.class, "arti");
 
         //La direccion por default de estos motores/servos sera FORWARD
         wheelFrontRight.setDirection(DcMotor.Direction.FORWARD);
         wheelBackRight.setDirection(DcMotor.Direction.FORWARD);
         wheelBackLeft.setDirection(DcMotor.Direction.FORWARD);
         wheelFrontLeft.setDirection(DcMotor.Direction.FORWARD);
+        motorIntakeLeft.setDirection(DcMotor.Direction.FORWARD);
+        motorArtiIntake.setDirection(DcMotor.Direction.FORWARD);
         //La direccion por default de estos motores sera REVERSE
-        motorIntakeLeft.setDirection(DcMotor.Direction.REVERSE);
         motorIntakeRight.setDirection(DcMotor.Direction.REVERSE);
         motorLift.setDirection(DcMotor.Direction.REVERSE);
 
@@ -56,6 +59,7 @@ public class Hardware {
         wheelBackLeft.setPower(0);
         motorIntakeLeft.setPower(0);
         motorIntakeRight.setPower(0);
+        motorArtiIntake.setPower(0);
         motorLift.setPower(0);
 
         //estos motores frenaran si su power es 0
@@ -70,6 +74,7 @@ public class Hardware {
         wheelBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorIntakeLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorIntakeRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorArtiIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
