@@ -14,7 +14,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.hardware.Hardware;
 
-@Autonomous(name="Autonomo Foundation Izquierda", group="Autonomos")
+@Autonomous(name="Autonomo Foundation Izquierda", group="Comp Ready")
 public class AutonomoFoundationIzquierda extends LinearOpMode {
     //
     DcMotor frontleft;

@@ -46,6 +46,7 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
             telemetry.addData("wheelBackRightPower", mecanumWheels.wheelBackRightPower / mecanumWheels.speed);
             telemetry.addData("wheelBackLeftPower", mecanumWheels.wheelBackLeftPower / mecanumWheels.speed);
             telemetry.addData("speed", mecanumWheels.speed);
+            telemetry.addData("servoStoneAutonomous position", hdw.servoStoneAutonomous.getPosition());
 
             //set power de los motores
             hdw.wheelFrontRight.setPower(mecanumWheels.wheelFrontRightPower / mecanumWheels.speed);
@@ -81,6 +82,13 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
         }else{
             hdw.motorIntakeLeft.setPower(0);
             hdw.motorIntakeRight.setPower(0);
+        }
+
+        //servo para arrastrar las stones
+        if(gamepad2.x){
+            hdw.servoStoneAutonomous.setPosition(hdw.servoStoneAutonomous.getPosition() + 0.005);
+        }else if(gamepad2.y){
+            hdw.servoStoneAutonomous.setPosition(hdw.servoStoneAutonomous.getPosition() - 0.005);
         }
 
         //lift del intake

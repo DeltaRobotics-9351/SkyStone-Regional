@@ -15,7 +15,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 import org.firstinspires.ftc.teamcode.hardware.Hardware;
 
-@Autonomous(name="Autonomo Foundation Derecha", group="Autonomos")
+@Autonomous(name="Autonomo Foundation Derecha", group="Comp Ready")
 public class AutonomoFoundationDerecha extends LinearOpMode {
     //
     DcMotor frontleft;

@@ -26,6 +26,9 @@ public class Hardware {
     public DcMotor motorLift = null;
     public DcMotor motorArtiIntake = null;
 
+    //servos
+    public Servo servoStoneAutonomous = null;
+
     //sensores
     //public ColorSensor colorSensor = null; (ejemplo)
 
@@ -40,6 +43,7 @@ public class Hardware {
         motorIntakeRight = hwMap.get(DcMotor.class, "inr");
         motorLift = hwMap.get(DcMotor.class, "lift");
         motorArtiIntake = hwMap.get(DcMotor.class, "arti");
+        servoStoneAutonomous = hwMap.servo.get("stoau");
 
         //La direccion por default de estos motores/servos sera FORWARD
         wheelFrontRight.setDirection(DcMotor.Direction.FORWARD);
@@ -47,9 +51,9 @@ public class Hardware {
         wheelBackLeft.setDirection(DcMotor.Direction.FORWARD);
         wheelFrontLeft.setDirection(DcMotor.Direction.FORWARD);
         motorIntakeLeft.setDirection(DcMotor.Direction.FORWARD);
+        motorIntakeRight.setDirection(DcMotor.Direction.FORWARD);
         motorArtiIntake.setDirection(DcMotor.Direction.FORWARD);
         //La direccion por default de estos motores sera REVERSE
-        motorIntakeRight.setDirection(DcMotor.Direction.REVERSE);
         motorLift.setDirection(DcMotor.Direction.REVERSE);
 
         //el power de todos los motores se define a 0
@@ -63,7 +67,7 @@ public class Hardware {
         motorLift.setPower(0);
 
         //estos motores frenaran si su power es 0
-        //motorArtiClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motorArtiIntake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         
         //se define la posicion por default de estos servos
 
@@ -74,7 +78,7 @@ public class Hardware {
         wheelBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorIntakeLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorIntakeRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motorArtiIntake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorArtiIntake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 

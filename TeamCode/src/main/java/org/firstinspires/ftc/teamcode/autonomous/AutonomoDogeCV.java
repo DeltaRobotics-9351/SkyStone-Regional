@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.autonomous;
 
 
 import com.disnodeteam.dogecv.detectors.skystone.SkystoneDetector;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
@@ -12,7 +13,7 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
 import java.util.Locale;
 
 @Autonomous(name="Autonomo DogeCV Test", group="DogeCV")
-
+@Disabled
 public class AutonomoDogeCV extends LinearOpMode {
     private OpenCvCamera phoneCam;
     private SkystoneDetector skyStoneDetector;
