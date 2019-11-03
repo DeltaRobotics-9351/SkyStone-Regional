@@ -32,8 +32,8 @@ public class Calibrate extends LinearOpMode {
         frontright = hdw.wheelFrontRight;
         backleft = hdw.wheelBackLeft;
         backright = hdw.wheelBackRight;
-        frontright.setDirection(DcMotorSimple.Direction.REVERSE);//If your robot goes backward, switch this from right to left
-        backright.setDirection(DcMotorSimple.Direction.REVERSE);//If your robot goes backward, switch this from right to left
+        frontright.setDirection(DcMotorSimple.Direction.REVERSE); //If your robot goes backward, switch this from right to left
+        backright.setDirection(DcMotorSimple.Direction.REVERSE); //If your robot goes backward, switch this from right to left
 
         telemetry.addData("[>]", "El robot se debera mover 20 in, el bias actual es " + bias);
         telemetry.update();
