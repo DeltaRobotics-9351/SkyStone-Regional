@@ -41,18 +41,18 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
             startA(); //movimientos del start A
             startB();//movimientos del start B
 
-            telemetry.addData("wheelFrontRightPower", mecanumWheels.wheelFrontRightPower / mecanumWheels.speed);
-            telemetry.addData("wheelFrontLeftPower", mecanumWheels.wheelFrontLeftPower / mecanumWheels.speed);
-            telemetry.addData("wheelBackRightPower", mecanumWheels.wheelBackRightPower / mecanumWheels.speed);
-            telemetry.addData("wheelBackLeftPower", mecanumWheels.wheelBackLeftPower / mecanumWheels.speed);
-            telemetry.addData("speed", mecanumWheels.speed);
+            telemetry.addData("wheelFrontRightPower", mecanumWheels.wheelFrontRightPower);
+            telemetry.addData("wheelFrontLeftPower", mecanumWheels.wheelFrontLeftPower);
+            telemetry.addData("wheelBackRightPower", mecanumWheels.wheelBackRightPower);
+            telemetry.addData("wheelBackLeftPower", mecanumWheels.wheelBackLeftPower);
+            telemetry.addData("turbo", mecanumWheels.turbo);
             telemetry.addData("servoStoneAutonomous position", hdw.servoStoneAutonomous.getPosition());
 
             //set power de los motores
-            hdw.wheelFrontRight.setPower(mecanumWheels.wheelFrontRightPower / mecanumWheels.speed);
-            hdw.wheelFrontLeft.setPower(mecanumWheels.wheelFrontLeftPower / mecanumWheels.speed);
-            hdw.wheelBackRight.setPower(mecanumWheels.wheelBackRightPower / mecanumWheels.speed);
-            hdw.wheelBackLeft.setPower(mecanumWheels.wheelBackLeftPower / mecanumWheels.speed);
+            hdw.wheelFrontRight.setPower(mecanumWheels.wheelFrontRightPower);
+            hdw.wheelFrontLeft.setPower(mecanumWheels.wheelFrontLeftPower);
+            hdw.wheelBackRight.setPower(mecanumWheels.wheelBackRightPower);
+            hdw.wheelBackLeft.setPower(mecanumWheels.wheelBackLeftPower);
 
             telemetry.update();  //manda los mensajes telemetry a la driver station
         }
@@ -64,7 +64,7 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
         //de velocidad. el fin de esto es para que el arrastrar la foundation en el endgame no sea
         //tan arriesgado y haya menos probabilidad de que tiremos cualquier stone
         if (gamepad1.left_trigger > 0.2 || gamepad1.right_trigger > 0.2) {
-            mecanumWheels.joystick(gamepad1, 0.05);
+            mecanumWheels.joystick(gamepad1, 0.3);
         } else {
             mecanumWheels.joystick(gamepad1, 1);
         }

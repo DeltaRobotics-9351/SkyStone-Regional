@@ -26,8 +26,9 @@ public class AutonomoSkystonePattern extends LinearOpMode {
         //la inicializamos
         phoneCam.openCameraDevice();
 
-        //creamos el detector de skystones
+        //creamos la pippeline
         patternPipeline = new SkystonePatternPipeline();
+        //definimos la pipeline para la camara
         phoneCam.setPipeline(patternPipeline);
 
         phoneCam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
@@ -38,14 +39,14 @@ public class AutonomoSkystonePattern extends LinearOpMode {
         while (opModeIsActive()) {
             //enviamos mensajes telemetry que contienen informacion
             telemetry.addData("PATTERN", patternPipeline.pattern);
+            telemetry.addData("LEFT", patternPipeline.valLeft);
+            telemetry.addData("RIGHT", patternPipeline.valRight);
             telemetry.addData("FRAME", phoneCam.getFrameCount());
             telemetry.addData("FPS", String.format("%.2f", phoneCam.getFps()));
             telemetry.addData("TFT MS", phoneCam.getTotalFrameTimeMs());
             telemetry.addData("PT MS", phoneCam.getPipelineTimeMs());
             telemetry.addData("OT MS", phoneCam.getOverheadTimeMs());
             telemetry.addData("MAX FPS", phoneCam.getCurrentPipelineMaxFps());
-            telemetry.addData("LEFT RECT", patternPipeline.left_hue + " " + patternPipeline.left_br);
-            telemetry.addData("RIGHT RECT", patternPipeline.right_hue + " " + patternPipeline.right_br);
             telemetry.update();
         }
     }

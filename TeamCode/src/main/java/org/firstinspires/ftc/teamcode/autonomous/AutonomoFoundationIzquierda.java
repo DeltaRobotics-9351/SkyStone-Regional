@@ -60,7 +60,7 @@ public class AutonomoFoundationIzquierda extends LinearOpMode {
 
         waitForStart();
 
-        moveToPosition(26.2, 0.2);
+        moveToPosition(26, 0.2);
         moveToPosition(-26, 0.2);
         strafeToPosition(-45.6, 0.2);
         moveToPosition(25, 0.2);
