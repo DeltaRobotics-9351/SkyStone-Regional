@@ -21,7 +21,7 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
     @Override
     public void runOpMode(){
         hdw = new Hardware(hardwareMap); //init hardware
-        hdw.createHardware();
+        hdw.initHardware(false);
 
         mecanumWheels = new MecanumWheels();
         telemetry.addData("[>]", "All set?"); //manda un mensaje a la driver station
@@ -45,7 +45,7 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
             telemetry.addData("wheelFrontLeftPower", mecanumWheels.wheelFrontLeftPower);
             telemetry.addData("wheelBackRightPower", mecanumWheels.wheelBackRightPower);
             telemetry.addData("wheelBackLeftPower", mecanumWheels.wheelBackLeftPower);
-            telemetry.addData("turbo", mecanumWheels.turbo);
+            telemetry.addData("wheels turbo", mecanumWheels.turbo);
             telemetry.addData("servoStoneAutonomous position", hdw.servoStoneAutonomous.getPosition());
 
             //set power de los motores
@@ -60,7 +60,7 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
     }
 
     public void startA() {
-        //si cualquiera de los 2 triggers es presionado (mayor que 0), el robot avanzara a la mitad
+        //si cualquiera de los 2 triggers es presionado (mayor que 0), el robot avanzara al 30%
         //de velocidad. el fin de esto es para que el arrastrar la foundation en el endgame no sea
         //tan arriesgado y haya menos probabilidad de que tiremos cualquier stone
         if (gamepad1.left_trigger > 0.2 || gamepad1.right_trigger > 0.2) {
@@ -77,8 +77,8 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
             hdw.motorIntakeLeft.setPower(1);
             hdw.motorIntakeRight.setPower(1);
         } else if (gamepad2.b) {
-            hdw.motorIntakeLeft.setPower(-1);
-            hdw.motorIntakeRight.setPower(-1);
+            hdw.motorIntakeLeft.setPower(-0.1);
+            hdw.motorIntakeRight.setPower(-0.1);
         }else{
             hdw.motorIntakeLeft.setPower(0);
             hdw.motorIntakeRight.setPower(0);
@@ -93,11 +93,11 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
 
         //lift del intake
         if(gamepad2.right_trigger > 0.1) {
-            hdw.motorLift.setPower(gamepad2.right_trigger);
+            hdw.motorSliders.setPower(gamepad2.right_trigger);
         }else if(gamepad2.left_trigger > 0.1){
-            hdw.motorLift.setPower(-gamepad2.left_trigger);
+            hdw.motorSliders.setPower(-gamepad2.left_trigger);
         }else{
-            hdw.motorLift.setPower(0);
+            hdw.motorSliders.setPower(0);
         }
 
         //articulacion del intake

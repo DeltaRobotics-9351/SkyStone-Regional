@@ -39,13 +39,9 @@ public class AutonomoSkystonePattern extends LinearOpMode {
         while (opModeIsActive()) {
             //enviamos mensajes telemetry que contienen informacion
             telemetry.addData("PATTERN", patternPipeline.pattern);
-            telemetry.addData("LEFT", patternPipeline.valLeft);
-            telemetry.addData("RIGHT", patternPipeline.valRight);
-            telemetry.addData("FRAME", phoneCam.getFrameCount());
+            telemetry.addData("LEFT COLOR", patternPipeline.valLeft);
+            telemetry.addData("RIGHT COLOR", patternPipeline.valRight);
             telemetry.addData("FPS", String.format("%.2f", phoneCam.getFps()));
-            telemetry.addData("TFT MS", phoneCam.getTotalFrameTimeMs());
-            telemetry.addData("PT MS", phoneCam.getPipelineTimeMs());
-            telemetry.addData("OT MS", phoneCam.getOverheadTimeMs());
             telemetry.addData("MAX FPS", phoneCam.getCurrentPipelineMaxFps());
             telemetry.update();
         }

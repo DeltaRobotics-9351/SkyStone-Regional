@@ -23,7 +23,7 @@ public class Hardware {
     //otros motores
     public DcMotor motorIntakeLeft = null;
     public DcMotor motorIntakeRight = null;
-    public DcMotor motorLift = null;
+    public DcMotor motorSliders = null;
     public DcMotor motorArtiIntake = null;
 
     //servos
@@ -32,17 +32,25 @@ public class Hardware {
     //sensores
     //public ColorSensor colorSensor = null; (ejemplo)
 
-    public void createHardware(){
+    //si el boolean "invertedChassis" es true, entonces las llantas de atras se convierten en las de adelante.
+    public void initHardware(boolean invertedChassis){
 
         //se obtienen todos los motores, servos y sensores del hardwaremap dado
-        wheelFrontRight = hwMap.get(DcMotor.class, "fr");
-        wheelFrontLeft = hwMap.get(DcMotor.class, "fl");
-        wheelBackRight = hwMap.get(DcMotor.class, "br");
-        wheelBackLeft = hwMap.get(DcMotor.class, "bl");
+        if(invertedChassis) {
+            wheelFrontRight = hwMap.get(DcMotor.class, "bl");
+            wheelFrontLeft = hwMap.get(DcMotor.class, "br");
+            wheelBackRight = hwMap.get(DcMotor.class, "fl");
+            wheelBackLeft = hwMap.get(DcMotor.class, "fr");
+        }else{
+            wheelFrontRight = hwMap.get(DcMotor.class, "fr");
+            wheelFrontLeft = hwMap.get(DcMotor.class, "fl");
+            wheelBackRight = hwMap.get(DcMotor.class, "br");
+            wheelBackLeft = hwMap.get(DcMotor.class, "bl");
+        }
         motorIntakeLeft = hwMap.get(DcMotor.class, "inl");
         motorIntakeRight = hwMap.get(DcMotor.class, "inr");
-        motorLift = hwMap.get(DcMotor.class, "lift");
-        motorArtiIntake = hwMap.get(DcMotor.class, "arti");
+        motorSliders = hwMap.get(DcMotor.class, "sli");
+        motorArtiIntake = hwMap.get(DcMotor.class, "art");
         servoStoneAutonomous = hwMap.servo.get("stoau");
 
         //La direccion por default de estos motores/servos sera FORWARD
@@ -53,8 +61,8 @@ public class Hardware {
         motorIntakeLeft.setDirection(DcMotor.Direction.FORWARD);
         motorIntakeRight.setDirection(DcMotor.Direction.FORWARD);
         motorArtiIntake.setDirection(DcMotor.Direction.FORWARD);
+        motorSliders.setDirection(DcMotor.Direction.FORWARD);
         //La direccion por default de estos motores sera REVERSE
-        motorLift.setDirection(DcMotor.Direction.REVERSE);
 
         //el power de todos los motores se define a 0
         wheelFrontRight.setPower(0);
@@ -64,7 +72,7 @@ public class Hardware {
         motorIntakeLeft.setPower(0);
         motorIntakeRight.setPower(0);
         motorArtiIntake.setPower(0);
-        motorLift.setPower(0);
+        motorSliders.setPower(0);
 
         //estos motores frenaran si su power es 0
         motorArtiIntake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -79,7 +87,7 @@ public class Hardware {
         motorIntakeLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorIntakeRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorArtiIntake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorSliders.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
 }

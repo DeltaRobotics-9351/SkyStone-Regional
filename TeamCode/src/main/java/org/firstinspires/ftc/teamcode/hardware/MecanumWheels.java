@@ -77,34 +77,35 @@ public class MecanumWheels {
         wheelBackLeftPower = 1 * turbo;
     }
 
-    public void turnRight(double speed){
+    public void turnRight(double turbo){
         this.turbo = turbo;
-        wheelFrontRightPower = -1 / speed;
-        wheelFrontLeftPower = 1 / speed;
-        wheelBackRightPower = -1 / speed;
-        wheelBackLeftPower = 1 / speed;
+        wheelFrontRightPower = -1 / turbo;
+        wheelFrontLeftPower = 1 / turbo;
+        wheelBackRightPower = -1 / turbo;
+        wheelBackLeftPower = 1 / turbo;
     }
 
-    public void turnLeft(double speed){
+    public void turnLeft(double turbo){
         this.turbo = turbo;
-        wheelFrontRightPower = 1 / speed;
-        wheelFrontLeftPower = -1 / speed;
-        wheelBackRightPower = 1 / speed;
-        wheelBackLeftPower = -1 / speed;
+        wheelFrontRightPower = 1 / turbo;
+        wheelFrontLeftPower = -1 / turbo;
+        wheelBackRightPower = 1 / turbo;
+        wheelBackLeftPower = -1 / turbo;
     }
 
-    public void tiltRight(double speed){
+    public void tiltRight(double turbo){
         this.turbo = turbo;
-        wheelFrontLeftPower = 1 / speed;
+        wheelFrontLeftPower = 1 / turbo;
         wheelFrontRightPower = 0;
-        wheelBackRightPower = 1 / speed;
+        wheelBackRightPower = 1 / turbo;
         wheelBackLeftPower = 0;
     }
 
-    public void tiltLeft(double speed){
-        wheelBackLeftPower = 1 / speed;
+    public void tiltLeft(double turbo){
+        this.turbo = turbo;
+        wheelBackLeftPower = 1 / turbo;
         wheelBackRightPower = 0;
-        wheelFrontRightPower = 1 / speed;
+        wheelFrontRightPower = 1 / turbo;
         wheelBackLeftPower = 0;
     }
 

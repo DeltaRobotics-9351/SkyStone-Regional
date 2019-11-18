@@ -43,7 +43,7 @@ public class AutonomoFoundationDerecha extends LinearOpMode {
     public void runOpMode(){
 
         hdw = new Hardware(hardwareMap);
-        hdw.createHardware();
+        hdw.initHardware(true);
 
         initGyro();
 

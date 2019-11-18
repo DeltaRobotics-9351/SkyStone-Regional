@@ -123,7 +123,7 @@ public class AutonomoTensorflow extends LinearOpMode {
                                     double dis = re.getHeight() / re.getImageHeight(); //se calcula una distancia aproximada al skystone dividiendo la altura de esta y la altura de la imagen.
                                     stones.add(new Stone(true, recognitionx, re.estimateAngleToObject(AngleUnit.DEGREES), dis)); // se guarda un objeto 'Stone' en la arraylist con algunas propiedades del recogniton
                                 }else if(re.getLabel().equals(LABEL_STONE)) {
-                                    double dis = re.getHeight() / re.getImageHeight(); //se calcula una distancia aproximada al stone dividiendo la altura de esta y de altura de la imagen.
+                                    double dis = re.getHeight() / re.getImageHeight(); //se calcula una distancia aproximada al stone dividiendo la altura de esta y la altura de la imagen.
                                     stones.add(new Stone(false, recognitionx, re.estimateAngleToObject(AngleUnit.DEGREES), dis)); // se guarda un objeto 'Stone' en la arraylist con algunas propiedades del recogniton
                                 }
                             }
