@@ -77,8 +77,8 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
             hdw.motorIntakeLeft.setPower(1);
             hdw.motorIntakeRight.setPower(1);
         } else if (gamepad2.b) {
-            hdw.motorIntakeLeft.setPower(-0.1);
-            hdw.motorIntakeRight.setPower(-0.1);
+            hdw.motorIntakeLeft.setPower(-0.5);
+            hdw.motorIntakeRight.setPower(-0.5);
         }else{
             hdw.motorIntakeLeft.setPower(0);
             hdw.motorIntakeRight.setPower(0);
@@ -86,27 +86,18 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
 
         //servo para arrastrar las stones
         if(gamepad2.x){
-            hdw.servoStoneAutonomous.setPosition(hdw.servoStoneAutonomous.getPosition() + 0.005);
+            hdw.servoStoneAutonomous.setPosition(hdw.servoStoneAutonomous.getPosition() + 0.05);
         }else if(gamepad2.y){
-            hdw.servoStoneAutonomous.setPosition(hdw.servoStoneAutonomous.getPosition() - 0.005);
+            hdw.servoStoneAutonomous.setPosition(hdw.servoStoneAutonomous.getPosition() - 0.05);
         }
 
-        //lift del intake
+        //slider del intake
         if(gamepad2.right_trigger > 0.1) {
             hdw.motorSliders.setPower(gamepad2.right_trigger);
         }else if(gamepad2.left_trigger > 0.1){
             hdw.motorSliders.setPower(-gamepad2.left_trigger);
         }else{
             hdw.motorSliders.setPower(0);
-        }
-
-        //articulacion del intake
-        if(gamepad2.dpad_up){
-            hdw.motorArtiIntake.setPower(0.01);
-        }else if(gamepad2.dpad_down){
-            hdw.motorArtiIntake.setPower(-0.01);
-        }else{
-            hdw.motorArtiIntake.setPower(0);
         }
 
     }

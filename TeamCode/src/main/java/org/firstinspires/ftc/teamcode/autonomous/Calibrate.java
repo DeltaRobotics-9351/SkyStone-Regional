@@ -26,7 +26,7 @@ public class Calibrate extends LinearOpMode {
 
     public void runOpMode() {
         hdw = new Hardware(hardwareMap);
-        hdw.createHardware();
+        hdw.initHardware(false);
 
         frontleft = hdw.wheelFrontLeft;
         frontright = hdw.wheelFrontRight;

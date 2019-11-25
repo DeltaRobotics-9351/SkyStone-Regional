@@ -79,6 +79,7 @@ public class AutonomoTensorflow extends LinearOpMode {
     public void runOpMode() {
 
         hdw = new Hardware(hardwareMap); //init hardware
+        hdw.initHardware(false);
 
         mecanumWheels = new MecanumWheels();
 

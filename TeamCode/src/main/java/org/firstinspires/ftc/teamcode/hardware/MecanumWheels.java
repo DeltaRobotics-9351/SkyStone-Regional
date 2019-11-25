@@ -21,12 +21,12 @@ public class MecanumWheels {
         this.turbo = turbo;
 
         double y1 = gamepad1.left_stick_y;
-        double x1 = gamepad1.left_stick_x;
-        double x2 = gamepad1.right_stick_x;
-        wheelFrontRightPower  = y1 + x2 - x1;
-        wheelBackRightPower   = -y1 - x2 - x1;
-        wheelFrontLeftPower   = y1 - x2 + x1;
-        wheelBackLeftPower    = -y1 + x2 + x1;
+        double x1 = -gamepad1.left_stick_x;
+        double x2 = -gamepad1.right_stick_x;
+        wheelFrontRightPower = y1 - x2 - x1;
+        wheelBackRightPower = y1 - x2 + x1;
+        wheelFrontLeftPower = y1 + x2 + x1;
+        wheelBackLeftPower = y1 + x2 - x1;
 
         double max = Math.max(Math.abs(wheelFrontRightPower), Math.max(Math.abs(wheelBackRightPower),
                 Math.max(Math.abs(wheelFrontLeftPower), Math.abs(wheelBackLeftPower))));
