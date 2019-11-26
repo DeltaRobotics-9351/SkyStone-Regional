@@ -85,4 +85,18 @@ public class Hardware {
         motorSliders.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
+    public void allWheelsForward(){
+        wheelFrontLeft.setDirection(DcMotor.Direction.FORWARD);
+        wheelFrontRight.setDirection(DcMotor.Direction.FORWARD);
+        wheelBackLeft.setDirection(DcMotor.Direction.FORWARD);
+        wheelBackRight.setDirection(DcMotor.Direction.FORWARD);
+    }
+
+    public void defaultWheelsDirection(){
+        wheelFrontLeft.setDirection(DcMotor.Direction.FORWARD);
+        wheelFrontRight.setDirection(DcMotor.Direction.REVERSE);
+        wheelBackLeft.setDirection(DcMotor.Direction.REVERSE);
+        wheelBackRight.setDirection(DcMotor.Direction.REVERSE);
+    }
+
 }
