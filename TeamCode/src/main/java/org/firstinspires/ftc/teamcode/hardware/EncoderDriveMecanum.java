@@ -13,7 +13,7 @@ public class EncoderDriveMecanum {
 
     private ElapsedTime runtime = new ElapsedTime();
 
-    final double     COUNTS_PER_REV_NEVEREST    = 1440 ;
+    final double     COUNTS_PER_REV_NEVEREST    = 1120 ;
     final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // This is < 1.0 if geared UP
     final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
     final double     COUNTS_PER_INCH         = (COUNTS_PER_REV_NEVEREST * DRIVE_GEAR_REDUCTION) /
