@@ -4,6 +4,11 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.TelemetryMessage;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EncoderDriveMecanum {
 
@@ -20,6 +25,8 @@ public class EncoderDriveMecanum {
             (WHEEL_DIAMETER_INCHES * 3.1415);
     final double     DRIVE_SPEED             = 0.6;
     final double     TURN_SPEED              = 0.5;
+
+    public ArrayList<TelemetryMessage> extraTelemetryMessages = new ArrayList<TelemetryMessage>();
 
     public EncoderDriveMecanum(Hardware hdw, Telemetry telemetry){
         this.hdw = hdw;
@@ -98,6 +105,10 @@ public class EncoderDriveMecanum {
                     hdw.wheelFrontRight.getCurrentPosition(),
                     hdw.wheelBackLeft.getCurrentPosition(),
                     hdw.wheelBackRight.getCurrentPosition());
+
+            for(TelemetryMessage msg : extraTelemetryMessages){
+                telemetry.addData(msg.caption, msg.value);
+            }
 
             telemetry.update();
         }
