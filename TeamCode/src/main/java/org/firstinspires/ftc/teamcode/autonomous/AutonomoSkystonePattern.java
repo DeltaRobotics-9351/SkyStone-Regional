@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.autonomous;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.pipeline.SkystonePatternPipeline;
@@ -9,7 +10,8 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 
-@Autonomous(name="Autonomo Skystone Pattern", group="Test")
+@Disabled
+@Autonomous(name="Autonomo Skystone Pattern", group="OpenCV")
 public class AutonomoSkystonePattern extends LinearOpMode {
 
     private OpenCvCamera phoneCam;
