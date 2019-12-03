@@ -131,27 +131,27 @@ public class EncoderDriveMecanum {
     }
 
     public void forward(double inches, double speed, double timeoutS) {
-        encoderDrive(speed, inches, inches, inches, inches, timeoutS);
+        encoderDrive(speed, -inches, inches, inches, inches, timeoutS);
     }
 
     public void backwards(double inches, double speed, double timeoutS) {
-        encoderDrive(speed, -inches, -inches, -inches, -inches, timeoutS);
+        encoderDrive(speed, inches, -inches, -inches, -inches, timeoutS);
     }
 
     public void strafeLeft(double inches, double speed, double timeoutS) {
-        encoderDrive(speed, inches, -inches, -inches, inches, timeoutS);
+        encoderDrive(speed, -inches, -inches, -inches, inches, timeoutS);
     }
 
     public void strafeRight(double inches, double speed, double timeoutS) {
-        encoderDrive(speed, -inches, inches, inches, -inches, timeoutS);
+        encoderDrive(speed, inches, inches, inches, -inches, timeoutS);
     }
 
     public void turnRight(double inches, double speed, double timeoutS) {
-        encoderDrive(speed, inches, -inches, inches, -inches, timeoutS);
+        encoderDrive(speed, -inches, -inches, inches, -inches, timeoutS);
     }
 
     public void turnLeft(double inches, double speed, double timeoutS) {
-        encoderDrive(speed, -inches, inches, -inches, inches, timeoutS);
+        encoderDrive(speed, inches, inches, -inches, inches, timeoutS);
     }
 
 }
