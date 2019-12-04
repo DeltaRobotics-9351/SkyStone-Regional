@@ -16,6 +16,9 @@ public class MecanumWheels {
 
     public MecanumWheels(){ }
 
+    //el codigo de estas llantas mecanum esta basado en "Quetzalcoatl"
+    //que se encuentra en
+
     public void joystick(Gamepad gamepad1, double turbo){
 
         this.turbo = turbo;

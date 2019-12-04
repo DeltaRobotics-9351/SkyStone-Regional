@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.TelemetryMessage;
 import org.firstinspires.ftc.teamcode.hardware.EncoderDriveMecanum;
+import org.firstinspires.ftc.teamcode.hardware.TimeDriveMecanum;
 import org.firstinspires.ftc.teamcode.pipeline.SkystonePatternPipeline;
 import org.firstinspires.ftc.teamcode.hardware.Hardware;
 import org.openftc.easyopencv.OpenCvCamera;
@@ -18,7 +19,9 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
     private OpenCvCamera phoneCam;
     private SkystonePatternPipeline patternPipeline;
     private Hardware hdw;
-
+    private TimeDriveMecanum timeDrive; //en este objeto se encuentran todas las funciones para
+                                        //el movimiento de las llantas mecanum con tiempo para
+                                        //mantener el codigo mas organizado y facil de cambiar.
     int pattern = 0;
 
     @Override
@@ -26,7 +29,10 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
         hdw = new Hardware(hardwareMap);
         hdw.initHardware(false);
 
-        //creamos la vista desde el celular de la camara
+        timeDrive = new TimeDriveMecanum(hdw, telemetry); //el objeto necesita el hardware para definir el power
+                                                          //a los motores y el telemetry para mandar mensajes.
+
+        //obtenemos la id del monitor de la camara (la vista de la camara que se vera desde el robot controller)
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
 
         //creamos la camara de OpenCV
@@ -35,8 +41,9 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
         //la inicializamos
         phoneCam.openCameraDevice();
 
-        //creamos la pippeline
+        //creamos la pipeline
         patternPipeline = new SkystonePatternPipeline();
+
         //definimos la pipeline para la camara
         phoneCam.setPipeline(patternPipeline);
 
@@ -58,137 +65,75 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
         phoneCam.closeCameraDevice(); //apagamos la camara ya que no es necesaria a partir de este punto.
 
-        telemetry.addData("Pattern", pattern);
+        telemetry.addData("Pattern", pattern); //mandamos mensaje telemetry para reportar que ya se detecto un patron
         telemetry.update();
 
         if(pattern == 1){
 
-            strafeLeft(0.5, 0.2);
-            backwards(0.5,0.8);
+            timeDrive.strafeLeft(0.5, 0.2);
+            timeDrive.backwards(0.5,0.8);
 
             hdw.servoStoneAutonomous.setPosition(1f);
             sleep((long)2000);
 
-            forward(0.5,0.9);
-            turnRight(0.5, 0.8);
-            backwards(0.5,1.5);
+            timeDrive.forward(0.5,0.9);
+            timeDrive.turnRight(0.5, 0.8);
+            timeDrive.backwards(0.5,1.5);
 
             hdw.servoStoneAutonomous.setPosition(0);
             sleep((long)2000);
 
-            forward(0.5, 1.7);
-            turnLeft(0.5, 0.8);
-            backwards(0.5,0.8);
+            timeDrive.forward(0.5, 1.7);
+            timeDrive.turnLeft(0.5, 0.8);
+            timeDrive.backwards(0.5,0.8);
 
             hdw.servoStoneAutonomous.setPosition(1f);
             sleep((long)2000);
-            forward(0.5,0.9);
-            turnRight(0.5, 0.8);
-            backwards(0.5,0.7);
+            timeDrive.forward(0.5,0.9);
+            timeDrive.turnRight(0.5, 0.8);
+            timeDrive.backwards(0.5,0.7);
 
         }else if(pattern == 2){
 
-            backwards(0.5,0.9);
+            timeDrive.backwards(0.5,0.9);
 
             hdw.servoStoneAutonomous.setPosition(1f);
             sleep((long)2000);
 
-            forward(0.5,0.9);
-            turnRight(0.5, 0.8);
-            backwards(0.5,1.5);
+            timeDrive.forward(0.5,0.9);
+            timeDrive.turnRight(0.5, 0.8);
+            timeDrive.backwards(0.5,1.5);
 
             hdw.servoStoneAutonomous.setPosition(0);
             sleep((long)2000);
 
-            forward(0.5, 1.8);
+            timeDrive.forward(0.5, 1.8);
             sleep((long)1000);
-            turnLeft(0.5, 0.8);
-            backwards(0.5,0.8);
+            timeDrive.turnLeft(0.5, 0.8);
+            timeDrive.backwards(0.5,0.8);
 
             hdw.servoStoneAutonomous.setPosition(1f);
             sleep((long)2000);
 
-            forward(0.5,0.9);
+            timeDrive.forward(0.5,0.9);
             sleep((long)1000);
-            turnRight(0.5, 0.8);
+            timeDrive.turnRight(0.5, 0.8);
             sleep((long)1000);
-            backwards(0.5,1.8);
+            timeDrive.backwards(0.5,1.8);
 
             hdw.servoStoneAutonomous.setPosition(0);
             sleep((long)2000);
 
-            forward(0.5,0.8);
+            timeDrive.forward(0.5,0.8);
 
         }else if(pattern == 3){
 
         }else{
+            //en teoria este codigo nunca se deberia de ejecutar, pero por si las dudas...
             telemetry.addData("[ERROR]", "No se que ha pasado ni como has llegado hasta aqui. Lo siento =(");
             telemetry.update();
             while(opModeIsActive());
         }
     }
 
-    //se define el power de todos los motores y el tiempo en el que avanzaran a este power
-    public void setAllWheelPower(double frontleft, double frontright, double backleft, double backright, double time, String movementDescription){
-
-        hdw.allWheelsForward();
-        hdw.wheelFrontLeft.setPower(frontleft);
-        hdw.wheelFrontRight.setPower(frontright);
-        hdw.wheelBackLeft.setPower(backleft);
-        hdw.wheelBackRight.setPower(backright);
-
-        telemetry.addData("Pattern", pattern);
-        telemetry.addData("movement", movementDescription);
-        telemetry.addData("frontleft", -frontleft);
-        telemetry.addData("frontright", frontright);
-        telemetry.addData("backleft", backleft);
-        telemetry.addData("backright", backright);
-        telemetry.addData("time", time);
-        telemetry.update();
-
-        sleep((long) (time * 1000));
-
-        hdw.wheelFrontLeft.setPower(0);
-        hdw.wheelFrontRight.setPower(0);
-        hdw.wheelBackLeft.setPower(0);
-        hdw.wheelBackRight.setPower(0);
-
-        telemetry.addData("Pattern", pattern);
-        telemetry.addData("frontleft", 0);
-        telemetry.addData("frontright", 0);
-        telemetry.addData("backleft", 0);
-        telemetry.addData("backright", 0);
-        telemetry.update();
-        hdw.defaultWheelsDirection();
-    }
-
-    //hacia adelante
-    public void forward(double power, double time) {
-        setAllWheelPower(-power, power, power, power, time, "forward");
-    }
-
-    //hacia atras
-    public void backwards(double power, double time) {
-        setAllWheelPower(power, -power, -power, -power, time, "backwards");
-    }
-
-    //deslizarse a la derecha
-    public void strafeLeft(double power, double time) {
-        setAllWheelPower(-power, -power, -power, power, time, "strafeLeft");
-    }
-
-    //deslizarse a la izquierda
-    public void strafeRight(double power, double time) {
-        setAllWheelPower(power, power, power, -power, time, "strafeRight");
-    }
-
-    //girar a la derecha
-    public void turnRight(double power, double time) {
-        setAllWheelPower(-power, -power, power, -power, time, "turnRight");
-    }
-
-    //girar a la izquierda
-    public void turnLeft(double power, double time) {
-        setAllWheelPower(power, power, -power, power, time, "turnLeft");
-    }
 }

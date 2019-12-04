@@ -16,7 +16,7 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
     long runmillis;
     long disappearmillis;
 
-    MecanumWheels mecanumWheels;
+    MecanumWheels mecanumWheels; //en este objeto se contiene el codigo para las llantas mecanum
 
     @Override
     public void runOpMode(){
@@ -30,7 +30,7 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
         waitForStart(); //espera hasta que se presione <play> en la driver station
 
         runmillis = System.currentTimeMillis();
-        disappearmillis = runmillis + (5 * 1000); //el tiempo en el que desaparecera el mensaje "GO!!!"
+        disappearmillis = runmillis + (3000); //el tiempo en el que desaparecera el mensaje "GO!!!" (milisegundos)
 
         while(opModeIsActive()){
 

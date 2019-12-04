@@ -17,21 +17,32 @@ public class SkystonePatternPipeline extends OpenCvPipeline {
     //el quarry y determinar con estas el pattern, y a partir de este pattern seguir instrucciones
     //especificas de movimiento para el robot, ya que conocemos la posicion de los skystones.
 
-    //se aplica un filtro de blanco y negro en el que las stones normales tienen un color diferente
+    //se aplica un filtro en el que las stones normales tienen un color diferente
     //a las skystones y asi se puede determinar si se trata de un skystone.
 
+
+    //para mover los rectangulos (las zonas en las que se detecta el color) usa las siguientes variables y
+    //no tendras que mover nada mas. La posicion es en relacion al tamano de la vista de la camara
+
+    private static final float rectanguloIzquierdoX = 10f;
+    private static final float rectanguloDerechoX = 9.5f;
+
+    private static final float rectanguloIzquierdoY = 5.3f;
+    private static final float rectanguloDerechoY = 5.3f;
+
+
+    //en teoria no hay necesidad de tocar nada a partir de aqui.
     public static int valLeft = -1;
     public static int valRight = -1;
 
     private static float rectHeight = .6f/8f;
     private static float rectWidth = 1.5f/8f;
 
-    private static float offsetX = 0f/8f;//changing this moves the three rects and the three circles left or right, range : (-2, 2) not inclusive
-    private static float offsetY = 0f/8f;//changing this moves the three rects and circles up or down, range: (-4, 4) not inclusive
+    private static float offsetX = 0f/8f;
+    private static float offsetY = 0f/8f;
 
-    private static float[] leftPos = {4f/10f+offsetX, 4f/5.3f+offsetY};//0 = col, 1 = row
-    private static float[] rightPos = {6f/9.5f+offsetX, 4f/5.3f+offsetY};
-    //moves all rectangles right or left by amount. units are in ratio to monitor
+    private static float[] leftPos = {4f/rectanguloIzquierdoX+offsetX, 4f/rectanguloIzquierdoY+offsetY};//0 = col, 1 = row
+    private static float[] rightPos = {6f/9.5f+rectanguloDerechoX, 4f/rectanguloDerechoY+offsetY};
 
     private final int rows = 640;
     private final int cols = 480;
@@ -57,6 +68,7 @@ public class SkystonePatternPipeline extends OpenCvPipeline {
     private Stage stageToRenderToViewport = Stage.detection;
     private Stage[] stages = Stage.values();
 
+    //definimos el pattern a una variable basandonos en que hay tres posibilidades, como ya se explico arriba
     public void definePattern(){
         if(valLeft == 255 && valRight == 255){
             pattern = 1;
@@ -79,13 +91,11 @@ public class SkystonePatternPipeline extends OpenCvPipeline {
         Imgproc.cvtColor(input, yCbCrChan2Mat, Imgproc.COLOR_RGB2YCrCb);//converts rgb to ycrcb
         Core.extractChannel(yCbCrChan2Mat, yCbCrChan2Mat, 2);//takes cb difference and stores
 
-        //b&w
+        //blanco y negro
         Imgproc.threshold(yCbCrChan2Mat, thresholdMat, 102, 255, Imgproc.THRESH_BINARY_INV);
 
-        //outline/contour
         Imgproc.findContours(thresholdMat, contoursList, new Mat(), Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE);
         yCbCrChan2Mat.copyTo(all);//copies mat object
-        //Imgproc.drawContours(all, contoursList, -1, new Scalar(255, 0, 0), 3, 8);//draws blue contours
 
 
         //get values from frame
