@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.TelemetryMessage;
 import org.firstinspires.ftc.teamcode.hardware.EncoderDriveMecanum;
+import org.firstinspires.ftc.teamcode.hardware.IMUTurnMecanum;
 import org.firstinspires.ftc.teamcode.hardware.TimeDriveMecanum;
 import org.firstinspires.ftc.teamcode.pipeline.SkystonePatternPipeline;
 import org.firstinspires.ftc.teamcode.hardware.Hardware;
@@ -22,6 +23,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
     private TimeDriveMecanum timeDrive; //en este objeto se encuentran todas las funciones para
                                         //el movimiento de las llantas mecanum con tiempo para
                                         //mantener el codigo mas organizado y facil de cambiar.
+    private IMUTurnMecanum imuTurn;
     int pattern = 0;
 
     @Override
@@ -29,8 +31,16 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
         hdw = new Hardware(hardwareMap); //creamos el hardware
         hdw.initHardware(false); //lo inicializamos
 
+        imuTurn = new IMUTurnMecanum(hdw, telemetry, 30);
         timeDrive = new TimeDriveMecanum(hdw, telemetry); //el objeto necesita el hardware para definir el power
                                                           //a los motores y el telemetry para mandar mensajes.
+
+        imuTurn.initIMU();
+
+        telemetry.addData("[/!\\]", "Calibrando el sensor IMU, espera...");
+        telemetry.update();
+
+        imuTurn.waitForIMUCalibration();
 
         //obtenemos la id del monitor de la camara (la vista de la camara que se vera desde el robot controller)
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -103,34 +113,37 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
     public void goForSkystoneRojo(){
         timeDrive.backwards(0.6,0.9);
 
-        hdw.servoStoneAutonomous.setPosition(0.6f);
-        sleep((long)2000);
+        sleep((long)1000);
+        hdw.servoStoneAutonomous.setPosition(0.5f);
+        sleep((long)1000);
 
-        timeDrive.forward(0.6,0.9);
-        timeDrive.turnRight(0.6, 0.7);
-        timeDrive.backwards(0.6,1.5);
+        timeDrive.forward(0.6,0.6);
+        sleep((long)1000);
+        imuTurn.rotate(-90, 0.8);
+        timeDrive.backwards(0.6,1.7);
 
         hdw.servoStoneAutonomous.setPosition(0);
-        sleep((long)2000);
-
-        timeDrive.forward(0.6, 1.8);
         sleep((long)1000);
-        timeDrive.turnLeft(0.6, 0.7);
-        timeDrive.backwards(0.6,0.8);
 
-        hdw.servoStoneAutonomous.setPosition(0.6f);
-        sleep((long)2000);
-
-        timeDrive.forward(0.6,0.9);
+        timeDrive.forward(0.6, 2.1);
         sleep((long)1000);
-        timeDrive.turnRight(0.6, 0.7);
-        sleep((long)1000);
-        timeDrive.backwards(0.6,1.8);
+        imuTurn.rotate(90, 0.8);
+        timeDrive.backwards(0.6,0.9);
 
+        sleep((long)1000);
+        hdw.servoStoneAutonomous.setPosition(0.5f);
+        sleep((long)1000);
+
+        timeDrive.forward(0.6,0.6);
+        sleep((long)1000);
+        imuTurn.rotate(-90, 0.8);
+        timeDrive.backwards(0.6,1.9);
+
+        sleep((long)1000);
         hdw.servoStoneAutonomous.setPosition(0);
-        sleep((long)2000);
+        sleep((long)1000);
 
-        timeDrive.forward(0.6,0.5);
+        timeDrive.forward(0.6,0.4);
     }
 
 }

@@ -77,11 +77,13 @@ public class TimeDriveMecanum {
     //girar a la derecha
     public void turnRight(double power, double timeSegs) {
         setAllWheelPower(-power, -power, power, -power, timeSegs, "turnRight");
+        sleep(500);
     }
 
     //girar a la izquierda
     public void turnLeft(double power, double timeSegs) {
         setAllWheelPower(power, power, -power, power, timeSegs, "turnLeft");
+        sleep(500);
     }
 
     public void sleep(long millis){

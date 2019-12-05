@@ -101,23 +101,26 @@ public class AutonomoSkystoneAzul extends LinearOpMode {
     public void goForSkystoneAzul(){
         timeDrive.backwards(0.6,0.9);
 
+        sleep((long)1000);
         hdw.servoStoneAutonomous.setPosition(0.6f);
-        sleep((long)2000);
+        sleep((long)1000);
 
         timeDrive.forward(0.6,0.9);
         timeDrive.turnLeft(0.6, 0.7);
         timeDrive.backwards(0.6,1.5);
 
+        sleep((long)1000);
         hdw.servoStoneAutonomous.setPosition(0);
-        sleep((long)2000);
+        sleep((long)1000);
 
         timeDrive.forward(0.6, 1.8);
         sleep((long)1000);
         timeDrive.turnRight(0.6, 0.7);
         timeDrive.backwards(0.6,0.8);
 
+        sleep((long)1000);
         hdw.servoStoneAutonomous.setPosition(0.6f);
-        sleep((long)2000);
+        sleep((long)1000);
 
         timeDrive.forward(0.6,0.9);
         sleep((long)1000);
@@ -125,8 +128,9 @@ public class AutonomoSkystoneAzul extends LinearOpMode {
         sleep((long)1000);
         timeDrive.backwards(0.6,1.8);
 
+        sleep((long)1000);
         hdw.servoStoneAutonomous.setPosition(0);
-        sleep((long)2000);
+        sleep((long)1000);
 
         timeDrive.forward(0.6,0.5);
     }
