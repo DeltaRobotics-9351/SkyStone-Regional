@@ -42,7 +42,7 @@ public class SkystonePatternPipeline extends OpenCvPipeline {
     private static float offsetY = 0f/8f;
 
     private static float[] leftPos = {4f/rectanguloIzquierdoX+offsetX, 4f/rectanguloIzquierdoY+offsetY};//0 = col, 1 = row
-    private static float[] rightPos = {6f/9.5f+rectanguloDerechoX, 4f/rectanguloDerechoY+offsetY};
+    private static float[] rightPos = {6f/rectanguloDerechoX+offsetX, 4f/rectanguloDerechoY+offsetY};
 
     private final int rows = 640;
     private final int cols = 480;

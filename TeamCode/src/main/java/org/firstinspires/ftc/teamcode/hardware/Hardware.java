@@ -74,6 +74,7 @@ public class Hardware {
         //estos motores frenaran si su power es 0
         
         //se define la posicion por default de estos servos
+        servoStoneAutonomous.setPosition(-1);
 
         //definimos los motores que correran con y sin encoders 
         wheelFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

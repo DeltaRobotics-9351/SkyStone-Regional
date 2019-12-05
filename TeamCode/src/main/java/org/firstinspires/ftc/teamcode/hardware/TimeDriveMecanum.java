@@ -27,7 +27,7 @@ public class TimeDriveMecanum {
 
         //mandamos mensajes telemetry para informar sobre lo que esta pasando
         telemetry.addData("movement", movementDescription);
-        telemetry.addData("frontleft", -frontleft);
+        telemetry.addData("frontleft", -frontleft); //este esta invertido por alguna razon.
         telemetry.addData("frontright", frontright);
         telemetry.addData("backleft", backleft);
         telemetry.addData("backright", backright);
@@ -65,12 +65,12 @@ public class TimeDriveMecanum {
     }
 
     //deslizarse a la izquierda
-    public void strafeLeft(double power, double timeSegs) {
+    public void strafeRight(double power, double timeSegs) {
         setAllWheelPower(-power, -power, -power, power, timeSegs, "strafeLeft");
     }
 
-    //deslizarse a la derecha
-    public void strafeRight(double power, double timeSegs) {
+    //deslizarse a la izquierda
+    public void strafeLeft(double power, double timeSegs) {
         setAllWheelPower(power, power, power, -power, timeSegs, "strafeRight");
     }
 

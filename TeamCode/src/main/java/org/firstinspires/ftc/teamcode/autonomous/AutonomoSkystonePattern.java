@@ -10,7 +10,7 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 
-@Disabled
+@Disabled //lo desabilite ya que solo lo use para probar el programa de vision
 @Autonomous(name="Autonomo Skystone Pattern", group="OpenCV")
 public class AutonomoSkystonePattern extends LinearOpMode {
 

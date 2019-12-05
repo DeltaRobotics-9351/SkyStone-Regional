@@ -58,7 +58,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Autonomous(name = "Autonomo TensorFlow", group = "Autonomos")
-@Disabled
+@Disabled // lo desabilite porque tensorflow sucks
 public class AutonomoTensorflow extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "Skystone.tflite";
     private static final String LABEL_STONE = "Stone";

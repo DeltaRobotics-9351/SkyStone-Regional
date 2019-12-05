@@ -4,17 +4,15 @@ package org.firstinspires.ftc.teamcode.autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.TelemetryMessage;
-import org.firstinspires.ftc.teamcode.hardware.EncoderDriveMecanum;
+import org.firstinspires.ftc.teamcode.hardware.Hardware;
 import org.firstinspires.ftc.teamcode.hardware.TimeDriveMecanum;
 import org.firstinspires.ftc.teamcode.pipeline.SkystonePatternPipeline;
-import org.firstinspires.ftc.teamcode.hardware.Hardware;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 
-@Autonomous(name="Autonomo Skystone Rojo", group="Final")
-public class AutonomoSkystoneRojo extends LinearOpMode {
+@Autonomous(name="Autonomo Skystone Azul", group="Final")
+public class AutonomoSkystoneAzul extends LinearOpMode {
 
     private OpenCvCamera phoneCam;
     private SkystonePatternPipeline patternPipeline;
@@ -60,8 +58,8 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
             telemetry.addData("[ERROR]", "Se ha posicionado de forma erronea el robot... Me estacionare para al menos hacer algo =)");
             telemetry.update();
             timeDrive.backwards(0.6, 0.4);
-            timeDrive.turnLeft(0.6, 0.8);
             sleep(1000);
+            timeDrive.turnRight(0.6, 0.8);
             timeDrive.backwards(0.6, 1);
             while(opModeIsActive());
         }
@@ -75,19 +73,19 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
         if(pattern == 1){
 
-            timeDrive.strafeRight(0.8, 0.4);
+            timeDrive.strafeLeft(0.8, 0.4);
 
-            goForSkystoneRojo();
+            goForSkystoneAzul();
 
         }else if(pattern == 2){
 
-            goForSkystoneRojo();
+            goForSkystoneAzul();
 
         }else if(pattern == 3){
 
-            timeDrive.strafeLeft(0.8, 0.4);
+            timeDrive.strafeRight(0.8, 0.4);
 
-            goForSkystoneRojo();
+            goForSkystoneAzul();
 
         }else{
             //en teoria este codigo nunca se deberia de ejecutar, pero por si las dudas...
@@ -100,14 +98,14 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
     //Codigo del autonomo en la posibilidad 2 (Pattern B).
     //A partir de este simplemente te deslizas para la izquierda
     //o derecha para hacer las otras 2 posibilidades (Pattern A y Pattern C)
-    public void goForSkystoneRojo(){
+    public void goForSkystoneAzul(){
         timeDrive.backwards(0.6,0.9);
 
         hdw.servoStoneAutonomous.setPosition(0.6f);
         sleep((long)2000);
 
         timeDrive.forward(0.6,0.9);
-        timeDrive.turnRight(0.6, 0.7);
+        timeDrive.turnLeft(0.6, 0.7);
         timeDrive.backwards(0.6,1.5);
 
         hdw.servoStoneAutonomous.setPosition(0);
@@ -115,7 +113,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
         timeDrive.forward(0.6, 1.8);
         sleep((long)1000);
-        timeDrive.turnLeft(0.6, 0.7);
+        timeDrive.turnRight(0.6, 0.7);
         timeDrive.backwards(0.6,0.8);
 
         hdw.servoStoneAutonomous.setPosition(0.6f);
@@ -123,7 +121,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
         timeDrive.forward(0.6,0.9);
         sleep((long)1000);
-        timeDrive.turnRight(0.6, 0.7);
+        timeDrive.turnLeft(0.6, 0.7);
         sleep((long)1000);
         timeDrive.backwards(0.6,1.8);
 

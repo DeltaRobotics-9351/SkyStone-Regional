@@ -85,10 +85,10 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
         }
 
         //servo para arrastrar las stones
-        if(gamepad2.x){
-            hdw.servoStoneAutonomous.setPosition(hdw.servoStoneAutonomous.getPosition() + 0.05);
-        }else if(gamepad2.y){
-            hdw.servoStoneAutonomous.setPosition(hdw.servoStoneAutonomous.getPosition() - 0.05);
+        if(gamepad2.y){
+            hdw.servoStoneAutonomous.setPosition(0);
+        }else if(gamepad2.x){
+            hdw.servoStoneAutonomous.setPosition(0.6);
         }
 
         //slider del intake
