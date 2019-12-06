@@ -11,7 +11,7 @@ import org.openftc.easyopencv.OpenCvPipeline;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SkystonePatternPipeline extends OpenCvPipeline {
+public class SkystonePatternPipelineAzul extends OpenCvPipeline {
 
     //el funcionamiento de esta pipeline consiste en detectar las dos ultimas stones de la derecha de
     //el quarry y determinar con estas el pattern, y a partir de este pattern seguir instrucciones
@@ -72,9 +72,9 @@ public class SkystonePatternPipeline extends OpenCvPipeline {
     public void definePattern(){
         if(valLeft == 255 && valRight == 255){
             pattern = 1;
-        }else if(valLeft == 0 && valRight == 255){
-            pattern = 2;
         }else if(valLeft == 255 && valRight == 0){
+            pattern = 2;
+        }else if(valLeft == 0 && valRight == 255){
             pattern = 3;
         }else{
             pattern = 0; // desconocido, se posiciono de forma erronea el robot.

@@ -6,10 +6,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.hardware.Hardware;
 import org.firstinspires.ftc.teamcode.hardware.TimeDriveMecanum;
-import org.firstinspires.ftc.teamcode.pipeline.SkystonePatternPipeline;
-import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvInternalCamera;
 
 @Autonomous(name="Autonomo Foundation Rojo", group="Final")
 public class AutonomoFoundationRojo extends LinearOpMode {

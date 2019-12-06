@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.pipeline.SkystonePatternPipeline;
+import org.firstinspires.ftc.teamcode.pipeline.SkystonePatternPipelineRojo;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
@@ -15,7 +15,7 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
 public class AutonomoSkystonePattern extends LinearOpMode {
 
     private OpenCvCamera phoneCam;
-    private SkystonePatternPipeline patternPipeline;
+    private SkystonePatternPipelineRojo patternPipeline;
 
     @Override
     public void runOpMode() {
@@ -29,7 +29,7 @@ public class AutonomoSkystonePattern extends LinearOpMode {
         phoneCam.openCameraDevice();
 
         //creamos la pippeline
-        patternPipeline = new SkystonePatternPipeline();
+        patternPipeline = new SkystonePatternPipelineRojo();
         //definimos la pipeline para la camara
         phoneCam.setPipeline(patternPipeline);
 

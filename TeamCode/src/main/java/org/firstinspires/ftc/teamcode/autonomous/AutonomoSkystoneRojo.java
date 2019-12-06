@@ -4,11 +4,9 @@ package org.firstinspires.ftc.teamcode.autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.TelemetryMessage;
-import org.firstinspires.ftc.teamcode.hardware.EncoderDriveMecanum;
 import org.firstinspires.ftc.teamcode.hardware.IMUTurnMecanum;
 import org.firstinspires.ftc.teamcode.hardware.TimeDriveMecanum;
-import org.firstinspires.ftc.teamcode.pipeline.SkystonePatternPipeline;
+import org.firstinspires.ftc.teamcode.pipeline.SkystonePatternPipelineRojo;
 import org.firstinspires.ftc.teamcode.hardware.Hardware;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -18,7 +16,7 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
 public class AutonomoSkystoneRojo extends LinearOpMode {
 
     private OpenCvCamera phoneCam;
-    private SkystonePatternPipeline patternPipeline;
+    private SkystonePatternPipelineRojo patternPipeline;
     private Hardware hdw;
     private TimeDriveMecanum timeDrive; //en este objeto se encuentran todas las funciones para
                                         //el movimiento de las llantas mecanum con tiempo para
@@ -31,7 +29,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
         hdw = new Hardware(hardwareMap); //creamos el hardware
         hdw.initHardware(false); //lo inicializamos
 
-        imuTurn = new IMUTurnMecanum(hdw, telemetry, 30);
+        imuTurn = new IMUTurnMecanum(hdw, telemetry, 0);
         timeDrive = new TimeDriveMecanum(hdw, telemetry); //el objeto necesita el hardware para definir el power
                                                           //a los motores y el telemetry para mandar mensajes.
 
@@ -52,7 +50,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
         phoneCam.openCameraDevice();
 
         //creamos la pipeline
-        patternPipeline = new SkystonePatternPipeline();
+        patternPipeline = new SkystonePatternPipelineRojo();
 
         //definimos la pipeline para la camara
         phoneCam.setPipeline(patternPipeline);
@@ -85,19 +83,119 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
         if(pattern == 1){
 
-            timeDrive.strafeRight(0.8, 0.4);
+            timeDrive.strafeRight(0.6, 0.5);
 
-            goForSkystoneRojo();
+            sleep(500);
+
+            timeDrive.backwards(0.6,0.9);
+
+            sleep((long)100);
+            hdw.servoStoneAutonomous.setPosition(0.6f);
+            sleep((long)1000);
+
+            timeDrive.forward(0.6,0.6);
+            sleep((long)1000);
+            imuTurn.rotate(-55, 0.5);
+            timeDrive.backwards(0.6,1.7);
+
+            hdw.servoStoneAutonomous.setPosition(0);
+            sleep((long)1000);
+
+            timeDrive.forward(0.6, 2.1);
+            sleep((long)1000);
+            imuTurn.rotate(55, 0.5);
+            timeDrive.backwards(0.6,0.9);
+
+            sleep((long)100);
+            hdw.servoStoneAutonomous.setPosition(0.6f);
+            sleep((long)1000);
+
+            timeDrive.forward(0.6,0.6);
+            sleep((long)1000);
+            imuTurn.rotate(-55, 0.5);
+            timeDrive.backwards(0.6,1.9);
+
+            sleep((long)1000);
+            hdw.servoStoneAutonomous.setPosition(0);
+            sleep((long)1000);
+
+            timeDrive.forward(0.6,0.4);
 
         }else if(pattern == 2){
 
-            goForSkystoneRojo();
+            timeDrive.backwards(0.6,0.9);
+
+            sleep((long)100);
+            hdw.servoStoneAutonomous.setPosition(0.6f);
+            sleep((long)1000);
+
+            timeDrive.forward(0.6,0.6);
+            sleep((long)1000);
+            imuTurn.rotate(-55, 0.5);
+            timeDrive.backwards(0.6,1.7);
+
+            hdw.servoStoneAutonomous.setPosition(0);
+            sleep((long)1000);
+
+            timeDrive.forward(0.6, 2.2);
+            sleep((long)1000);
+            imuTurn.rotate(55, 0.5);
+            timeDrive.backwards(0.6,0.9);
+
+            sleep((long)100);
+            hdw.servoStoneAutonomous.setPosition(0.6f);
+            sleep((long)1000);
+
+            timeDrive.forward(0.6,0.9);
+            sleep((long)1000);
+            imuTurn.rotate(-55, 0.5);
+            timeDrive.backwards(0.6,1.9);
+
+            sleep((long)1000);
+            hdw.servoStoneAutonomous.setPosition(0);
+            sleep((long)1000);
+
+            timeDrive.forward(0.6,0.4);
 
         }else if(pattern == 3){
 
-            timeDrive.strafeLeft(0.8, 0.4);
+            timeDrive.strafeLeft(0.4, 0.6);
 
-            goForSkystoneRojo();
+            sleep(700);
+
+            timeDrive.backwards(0.6,1.1);
+
+            sleep((long)100);
+            hdw.servoStoneAutonomous.setPosition(0.6f);
+            sleep((long)1000);
+
+            timeDrive.forward(0.6,0.6);
+            sleep((long)1000);
+            imuTurn.rotate(-55, 0.4);
+            timeDrive.backwards(0.6,1.4);
+
+            hdw.servoStoneAutonomous.setPosition(0);
+            sleep((long)1000);
+
+            timeDrive.forward(0.6, 2.25);
+            sleep((long)1000);
+            imuTurn.rotate(55, 0.3);
+            timeDrive.backwards(0.6,0.9);
+
+            sleep((long)100);
+            hdw.servoStoneAutonomous.setPosition(0.6f);
+            sleep((long)1000);
+
+            timeDrive.forward(0.6,1.2);
+            sleep((long)1000);
+            imuTurn.rotate(-55, 0.3);
+            timeDrive.backwards(0.6,1.9);
+
+            sleep((long)1000);
+            hdw.servoStoneAutonomous.setPosition(0);
+            sleep((long)1000);
+
+            timeDrive.forward(0.6,0.5);
 
         }else{
             //en teoria este codigo nunca se deberia de ejecutar, pero por si las dudas...
@@ -111,39 +209,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
     //A partir de este simplemente te deslizas para la izquierda
     //o derecha para hacer las otras 2 posibilidades (Pattern A y Pattern C)
     public void goForSkystoneRojo(){
-        timeDrive.backwards(0.6,0.9);
 
-        sleep((long)1000);
-        hdw.servoStoneAutonomous.setPosition(0.5f);
-        sleep((long)1000);
-
-        timeDrive.forward(0.6,0.6);
-        sleep((long)1000);
-        imuTurn.rotate(-90, 0.8);
-        timeDrive.backwards(0.6,1.7);
-
-        hdw.servoStoneAutonomous.setPosition(0);
-        sleep((long)1000);
-
-        timeDrive.forward(0.6, 2.1);
-        sleep((long)1000);
-        imuTurn.rotate(90, 0.8);
-        timeDrive.backwards(0.6,0.9);
-
-        sleep((long)1000);
-        hdw.servoStoneAutonomous.setPosition(0.5f);
-        sleep((long)1000);
-
-        timeDrive.forward(0.6,0.6);
-        sleep((long)1000);
-        imuTurn.rotate(-90, 0.8);
-        timeDrive.backwards(0.6,1.9);
-
-        sleep((long)1000);
-        hdw.servoStoneAutonomous.setPosition(0);
-        sleep((long)1000);
-
-        timeDrive.forward(0.6,0.4);
     }
 
 }

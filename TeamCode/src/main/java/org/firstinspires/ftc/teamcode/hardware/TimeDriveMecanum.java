@@ -66,12 +66,12 @@ public class TimeDriveMecanum {
 
     //deslizarse a la izquierda
     public void strafeRight(double power, double timeSegs) {
-        setAllWheelPower(-power, -power, -power, power, timeSegs, "strafeLeft");
+        setAllWheelPower(-power*0.7, -power*0.7, -power, power, timeSegs, "strafeLeft");
     }
 
     //deslizarse a la izquierda
     public void strafeLeft(double power, double timeSegs) {
-        setAllWheelPower(power, power, power, -power, timeSegs, "strafeRight");
+        setAllWheelPower(power*0.7, power*0.7, power, -power, timeSegs, "strafeRight");
     }
 
     //girar a la derecha
