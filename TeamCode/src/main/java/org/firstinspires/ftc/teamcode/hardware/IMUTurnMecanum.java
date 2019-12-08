@@ -5,6 +5,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.AngleDirection;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -24,13 +25,9 @@ public class IMUTurnMecanum {
 
     Telemetry telemetry;
 
-    int margenError; //esto sirve porque las llantas mecanum derrapan un poco despues de que termina el movimientow
-
-
-    public IMUTurnMecanum(Hardware hdw, Telemetry telemetry, int margenError){
+    public IMUTurnMecanum(Hardware hdw, Telemetry telemetr){
         this.hdw = hdw;
         this.telemetry = telemetry;
-        this.margenError = margenError;
     }
 
     public void initIMU(){
@@ -79,9 +76,8 @@ public class IMUTurnMecanum {
         return globalAngle;
     }
 
-    public void rotate(int idegrees, double power)
+    public void rotate(double degrees, double power)
     {
-        int degrees = idegrees;
 
         hdw.allWheelsForward();
         double  backleftpower, backrightpower, frontrightpower, frontleftpower;
@@ -95,7 +91,6 @@ public class IMUTurnMecanum {
             backrightpower = -power;
             frontleftpower = power;
             frontrightpower = -power;
-            degrees += margenError; //cambiamos los degrees sumandole el margen de error porque es un numero negativo
         }
         else if (degrees > 0) // si es mayor a 0 significa que el robot girara a la izquierda
         {   // girar a la izquierda
@@ -103,7 +98,6 @@ public class IMUTurnMecanum {
             backrightpower = power;
             frontleftpower = -power;
             frontrightpower = power;
-            degrees -= margenError; //cambiamos los degrees restandole el margen de error porque es un numero positivo
         }
         else return;
 
@@ -118,26 +112,20 @@ public class IMUTurnMecanum {
         {
             while (getAngle() == 0) { //al girar a la derecha necesitamos salirnos de 0 grados primero
                 telemetry.addData("imuAngle", getAngle());
-                telemetry.addData("degreesDestino", idegrees);
-                telemetry.addData("margenError", margenError);
-                telemetry.addData("degreesTrasMargenError", degrees);
+                telemetry.addData("degreesDestino", degrees);
                 telemetry.update();
             }
 
-            while (getAngle() > degrees) { //entramos en un bucle hasta que los degrees no sean los esperados
+            while (getAngle() > degrees) { //entramos en un bucle hasta que los degrees sean los esperados
                 telemetry.addData("imuAngle", getAngle());
-                telemetry.addData("degreesDestino", idegrees);
-                telemetry.addData("margenError", margenError);
-                telemetry.addData("degreesTrasMargenError", degrees);
+                telemetry.addData("degreesDestino", degrees);
                 telemetry.update();
             }
         }
         else
-            while (getAngle() < degrees) { //entramos en un bucle hasta que los degrees no sean los esperados
+            while (getAngle() < degrees) { //entramos en un bucle hasta que los degrees sean los esperados
                 telemetry.addData("imuAngle", getAngle());
-                telemetry.addData("degreesDestino", idegrees);
-                telemetry.addData("margenError", margenError);
-                telemetry.addData("degreesTrasMargenError", degrees);
+                telemetry.addData("degreesDestino", degrees);
                 telemetry.update();
             }
 
@@ -147,8 +135,9 @@ public class IMUTurnMecanum {
         frontleft.setPower(0);
         frontright.setPower(0);
 
-        // esperamos a que termine de derrapar
-        sleep(500);
+        waitForTurnToFinish();
+
+        correctRotation(degrees);
 
         // reiniciamos el IMU otra vez.
         resetAngle();
@@ -161,6 +150,21 @@ public class IMUTurnMecanum {
         globalAngle = 0;
     }
 
+    private void correctRotation(double expectedAngle){
+
+        double deltaAngle = calculateDeltaBetweenAngles(getAngle(), expectedAngle);
+
+        rotate(deltaAngle, 0.3);
+
+    }
+
+    private double calculateDeltaBetweenAngles(double angle1, double angle2){
+        double difference = angle2 - angle1;
+        while (difference < -180) difference += 360;
+        while (difference > 180) difference -= 360;
+        return difference;
+    }
+
 
     public void sleep(long millis){
         try {
@@ -168,6 +172,38 @@ public class IMUTurnMecanum {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+    }
+
+    //esta funcion sirve para esperar que el robot este totalmente estatico.
+    private void waitForTurnToFinish(){
+
+        double beforeAngle = getAngle();
+        double deltaAngle = 0;
+
+        sleep(200);
+
+        deltaAngle = getAngle() - beforeAngle;
+
+        telemetry.addData("currentAngle", getAngle());
+        telemetry.addData("beforeAngle", beforeAngle);
+        telemetry.addData("deltaAngle", deltaAngle);
+        telemetry.update();
+
+        while(deltaAngle != 0){
+
+            telemetry.addData("currentAngle", getAngle());
+            telemetry.addData("beforeAngle", beforeAngle);
+            telemetry.addData("deltaAngle", deltaAngle);
+            telemetry.update();
+
+            deltaAngle = getAngle() - beforeAngle;
+
+            beforeAngle = getAngle();
+
+            sleep(200);
+
+        }
+
     }
 
 
