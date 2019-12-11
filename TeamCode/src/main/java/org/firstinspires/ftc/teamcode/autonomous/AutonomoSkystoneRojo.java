@@ -96,7 +96,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
             timeDrive.forward(0.6,0.6);
             sleep((long)1000);
-            imuTurn.rotate(-90, 0.2);
+            imuTurn.rotate(-70, 0.4);
             timeDrive.backwards(0.6,1.7);
 
             hdw.servoStoneAutonomous.setPosition(0);
@@ -104,7 +104,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
             timeDrive.forward(0.6, 2.1);
             sleep((long)1000);
-            imuTurn.rotate(90, 0.2);
+            imuTurn.rotate(70, 0.4);
             timeDrive.backwards(0.6,0.9);
 
             sleep((long)100);
@@ -113,7 +113,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
             timeDrive.forward(0.6,0.6);
             sleep((long)1000);
-            imuTurn.rotate(-90, 0.2);
+            imuTurn.rotate(-70, 0.4);
             timeDrive.backwards(0.6,1.9);
 
             sleep((long)1000);
@@ -132,7 +132,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
             timeDrive.forward(0.6,0.6);
             sleep((long)1000);
-            imuTurn.rotate(-90, 0.2);
+            imuTurn.rotate(-70, 0.4);
             timeDrive.backwards(0.6,1.7);
 
             hdw.servoStoneAutonomous.setPosition(0);
@@ -140,7 +140,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
             timeDrive.forward(0.6, 2.2);
             sleep((long)1000);
-            imuTurn.rotate(90, 0.2);
+            imuTurn.rotate(70, 0.4);
             timeDrive.backwards(0.6,0.9);
 
             sleep((long)100);
@@ -149,7 +149,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
             timeDrive.forward(0.6,0.9);
             sleep((long)1000);
-            imuTurn.rotate(-90, 0.2);
+            imuTurn.rotate(-70, 0.4);
             timeDrive.backwards(0.6,1.9);
 
             sleep((long)1000);
@@ -172,7 +172,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
             timeDrive.forward(0.6,0.6);
             sleep((long)1000);
-            imuTurn.rotate(-90, 0.2);
+            imuTurn.rotate(-70, 0.4);
             timeDrive.backwards(0.6,1.4);
 
             hdw.servoStoneAutonomous.setPosition(0);
@@ -180,7 +180,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
             timeDrive.forward(0.6, 2);
             sleep((long)1000);
-            imuTurn.rotate(90, 0.2);
+            imuTurn.rotate(70, 0.4);
             timeDrive.backwards(0.6,0.9);
 
             sleep((long)100);
@@ -189,7 +189,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
             timeDrive.forward(0.6,1.2);
             sleep((long)1000);
-            imuTurn.rotate(-90, 0.2);
+            imuTurn.rotate(-70, 0.4);
             timeDrive.backwards(0.6,1.9);
 
             sleep((long)1000);
@@ -206,11 +206,5 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
         }
     }
 
-    //Codigo del autonomo en la posibilidad 2 (Pattern B).
-    //A partir de este simplemente te deslizas para la izquierda
-    //o derecha para hacer las otras 2 posibilidades (Pattern A y Pattern C)
-    public void goForSkystoneRojo(){
-
-    }
 
 }
