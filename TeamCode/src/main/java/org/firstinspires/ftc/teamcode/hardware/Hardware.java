@@ -27,6 +27,7 @@ public class Hardware {
 
     //servos
     public Servo servoStoneAutonomous = null;
+    public Servo servoCapstone = null;
 
     //sensores
     //public ColorSensor colorSensor = null; (ejemplo)
@@ -50,9 +51,10 @@ public class Hardware {
         motorIntakeRight = hwMap.get(DcMotor.class, "IR");
         motorSliders = hwMap.get(DcMotor.class, "SL");
         servoStoneAutonomous = hwMap.servo.get("FS");
+        servoCapstone = hwMap.servo.get("SC");
 
 
-        //La direccion por default de estos motores/servos sera FORWARD
+        //La direccion por default de estos motores sera FORWARD
         wheelFrontLeft.setDirection(DcMotor.Direction.FORWARD);
         motorIntakeRight.setDirection(DcMotor.Direction.FORWARD);
         motorSliders.setDirection(DcMotor.Direction.FORWARD);
@@ -74,7 +76,8 @@ public class Hardware {
         //estos motores frenaran si su power es 0
         
         //se define la posicion por default de estos servos
-        servoStoneAutonomous.setPosition(-1);
+        servoStoneAutonomous.setPosition(0);
+        servoCapstone.setPosition(1);
 
         //definimos los motores que correran con y sin encoders 
         wheelFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

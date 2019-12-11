@@ -5,10 +5,11 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.hardware.Hardware;
-import org.firstinspires.ftc.teamcode.hardware.IMUTurnMecanum;
+import org.firstinspires.ftc.teamcode.hardware.IMUDriveMecanum;
 import org.firstinspires.ftc.teamcode.hardware.TimeDriveMecanum;
 import org.firstinspires.ftc.teamcode.pipeline.SkystonePatternPipelineAzul;
 import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 
@@ -21,7 +22,7 @@ public class AutonomoSkystoneAzul extends LinearOpMode {
     private TimeDriveMecanum timeDrive; //en este objeto se encuentran todas las funciones para
                                         //el movimiento de las llantas mecanum con tiempo para
                                         //mantener el codigo mas organizado y facil de cambiar.
-    private IMUTurnMecanum imuTurn;
+    private IMUDriveMecanum imuTurn;
     int pattern = 0;
 
     @Override
@@ -29,7 +30,7 @@ public class AutonomoSkystoneAzul extends LinearOpMode {
         hdw = new Hardware(hardwareMap); //creamos el hardware
         hdw.initHardware(false); //lo inicializamos
 
-        imuTurn = new IMUTurnMecanum(hdw, telemetry, 0);
+        imuTurn = new IMUDriveMecanum(hdw, telemetry);
         timeDrive = new TimeDriveMecanum(hdw, telemetry); //el objeto necesita el hardware para definir el power
                                                           //a los motores y el telemetry para mandar mensajes.
 
@@ -44,7 +45,7 @@ public class AutonomoSkystoneAzul extends LinearOpMode {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
 
         //creamos la camara de OpenCV
-        phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
+        phoneCam = OpenCvCameraFactory.getInstance().createInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
 
         //la inicializamos
         phoneCam.openCameraDevice();

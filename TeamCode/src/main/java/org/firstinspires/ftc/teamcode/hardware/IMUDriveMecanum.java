@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.AngleDirection;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-public class IMUTurnMecanum {
+public class IMUDriveMecanum {
 
     public BNO055IMU imu;
     Hardware hdw;
@@ -25,7 +25,7 @@ public class IMUTurnMecanum {
 
     Telemetry telemetry;
 
-    public IMUTurnMecanum(Hardware hdw, Telemetry telemetr){
+    public IMUDriveMecanum(Hardware hdw, Telemetry telemetry){
         this.hdw = hdw;
         this.telemetry = telemetry;
     }
@@ -135,10 +135,6 @@ public class IMUTurnMecanum {
         frontleft.setPower(0);
         frontright.setPower(0);
 
-        waitForTurnToFinish();
-
-        correctRotation(degrees);
-
         // reiniciamos el IMU otra vez.
         resetAngle();
         hdw.defaultWheelsDirection();
@@ -150,21 +146,99 @@ public class IMUTurnMecanum {
         globalAngle = 0;
     }
 
-    private void correctRotation(double expectedAngle){
+    public double calculateDeltaBetweenAngles(double angle1, double angle2){
+        double deltaAngle = angle1 - angle2;
 
-        double deltaAngle = calculateDeltaBetweenAngles(getAngle(), expectedAngle);
+        if (deltaAngle < -180)
+            deltaAngle += 360;
+        else if (deltaAngle > 180)
+            deltaAngle -= 360;
 
-        rotate(deltaAngle, 0.3);
+        return deltaAngle;
+    }
+
+    //como el strafing se va chueco, con el sensor imu lo podemos corregir.
+    //el tiempo es en segundos.
+    public void selfCorrectingStrafeRight(double power, double time){
+
+        long finalMillis = System.currentTimeMillis() + (long)(time*1000);
+
+        double initialAngle = getAngle();
+
+        while(System.currentTimeMillis() < finalMillis){
+
+            double frontleft = power, frontright = -power, backleft = -power, backright = power;
+
+            if(getAngle() < initialAngle){
+                double deltaAngle = calculateDeltaBetweenAngles(initialAngle, getAngle());
+
+                double counteractConstant = 0.1;
+                double counteractValue = deltaAngle * counteractConstant;
+
+                frontleft = power / counteractValue;
+                frontright = -power;
+                backleft = -power / counteractValue;
+                backright = power;
+
+                telemetry.addData("frontleft", frontleft);
+                telemetry.addData("frontright", frontright);
+                telemetry.addData("backleft", backleft);
+                telemetry.addData("backright", backright);
+                telemetry.addData("counteractValue", counteractValue);
+                telemetry.addData("deltaAngle", deltaAngle);
+                telemetry.update();
+
+            }else if(getAngle() > initialAngle){
+                double deltaAngle = calculateDeltaBetweenAngles(initialAngle, getAngle());
+
+                double counteractConstant = 0.2;
+                double counteractValue = deltaAngle * counteractConstant;
+
+                frontleft = power;
+                frontright = -power / counteractValue;
+                backleft = -power;
+                backright = power / counteractValue;
+
+                telemetry.addData("frontleft", frontleft);
+                telemetry.addData("frontright", frontright);
+                telemetry.addData("backleft", backleft);
+                telemetry.addData("backright", backright);
+                telemetry.addData("counteractValue", counteractValue);
+                telemetry.addData("deltaAngle", deltaAngle);
+                telemetry.update();
+
+            }else{
+                frontleft = power;
+                frontright = -power;
+                backleft = -power;
+                backright = power;
+                telemetry.addData("frontleft", frontleft);
+                telemetry.addData("frontright", frontright);
+                telemetry.addData("backleft", backleft);
+                telemetry.addData("backright", backright);
+                telemetry.update();
+            }
+
+            defineAllWheelPower(frontleft,frontright,backleft,backright);
+
+        }
+
+        defineAllWheelPower(0,0,0,0);
+
+        telemetry.addData("frontleft", 0);
+        telemetry.addData("frontright", 0);
+        telemetry.addData("backleft", 0);
+        telemetry.addData("backright", 0);
+        telemetry.update();
 
     }
 
-    private double calculateDeltaBetweenAngles(double angle1, double angle2){
-        double difference = angle2 - angle1;
-        while (difference < -180) difference += 360;
-        while (difference > 180) difference -= 360;
-        return difference;
+    private void defineAllWheelPower(double frontleft, double frontright, double backleft, double backright){
+        hdw.wheelFrontLeft.setPower(frontleft);
+        hdw.wheelFrontRight.setPower(frontright);
+        hdw.wheelBackLeft.setPower(backleft);
+        hdw.wheelBackRight.setPower(backright);
     }
-
 
     public void sleep(long millis){
         try {
@@ -173,38 +247,5 @@ public class IMUTurnMecanum {
             Thread.currentThread().interrupt();
         }
     }
-
-    //esta funcion sirve para esperar que el robot este totalmente estatico.
-    private void waitForTurnToFinish(){
-
-        double beforeAngle = getAngle();
-        double deltaAngle = 0;
-
-        sleep(200);
-
-        deltaAngle = getAngle() - beforeAngle;
-
-        telemetry.addData("currentAngle", getAngle());
-        telemetry.addData("beforeAngle", beforeAngle);
-        telemetry.addData("deltaAngle", deltaAngle);
-        telemetry.update();
-
-        while(deltaAngle != 0){
-
-            telemetry.addData("currentAngle", getAngle());
-            telemetry.addData("beforeAngle", beforeAngle);
-            telemetry.addData("deltaAngle", deltaAngle);
-            telemetry.update();
-
-            deltaAngle = getAngle() - beforeAngle;
-
-            beforeAngle = getAngle();
-
-            sleep(200);
-
-        }
-
-    }
-
 
 }

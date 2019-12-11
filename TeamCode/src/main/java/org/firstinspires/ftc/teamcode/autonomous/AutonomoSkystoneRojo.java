@@ -4,11 +4,12 @@ package org.firstinspires.ftc.teamcode.autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.hardware.IMUTurnMecanum;
+import org.firstinspires.ftc.teamcode.hardware.IMUDriveMecanum;
 import org.firstinspires.ftc.teamcode.hardware.TimeDriveMecanum;
 import org.firstinspires.ftc.teamcode.pipeline.SkystonePatternPipelineRojo;
 import org.firstinspires.ftc.teamcode.hardware.Hardware;
 import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 
@@ -21,7 +22,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
     private TimeDriveMecanum timeDrive; //en este objeto se encuentran todas las funciones para
                                         //el movimiento de las llantas mecanum con tiempo para
                                         //mantener el codigo mas organizado y facil de cambiar.
-    private IMUTurnMecanum imuTurn;
+    private IMUDriveMecanum imuTurn;
     int pattern = 0;
 
     @Override
@@ -29,7 +30,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
         hdw = new Hardware(hardwareMap); //creamos el hardware
         hdw.initHardware(false); //lo inicializamos
 
-        imuTurn = new IMUTurnMecanum(hdw, telemetry, 0);
+        imuTurn = new IMUDriveMecanum(hdw, telemetry);
         timeDrive = new TimeDriveMecanum(hdw, telemetry); //el objeto necesita el hardware para definir el power
                                                           //a los motores y el telemetry para mandar mensajes.
 
@@ -44,7 +45,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
 
         //creamos la camara de OpenCV
-        phoneCam = new OpenCvInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
+        phoneCam = OpenCvCameraFactory.getInstance().createInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
 
         //la inicializamos
         phoneCam.openCameraDevice();
@@ -95,7 +96,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
             timeDrive.forward(0.6,0.6);
             sleep((long)1000);
-            imuTurn.rotate(-55, 0.5);
+            imuTurn.rotate(-90, 0.2);
             timeDrive.backwards(0.6,1.7);
 
             hdw.servoStoneAutonomous.setPosition(0);
@@ -103,7 +104,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
             timeDrive.forward(0.6, 2.1);
             sleep((long)1000);
-            imuTurn.rotate(55, 0.5);
+            imuTurn.rotate(90, 0.2);
             timeDrive.backwards(0.6,0.9);
 
             sleep((long)100);
@@ -112,7 +113,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
             timeDrive.forward(0.6,0.6);
             sleep((long)1000);
-            imuTurn.rotate(-55, 0.5);
+            imuTurn.rotate(-90, 0.2);
             timeDrive.backwards(0.6,1.9);
 
             sleep((long)1000);
@@ -131,7 +132,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
             timeDrive.forward(0.6,0.6);
             sleep((long)1000);
-            imuTurn.rotate(-55, 0.5);
+            imuTurn.rotate(-90, 0.2);
             timeDrive.backwards(0.6,1.7);
 
             hdw.servoStoneAutonomous.setPosition(0);
@@ -139,7 +140,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
             timeDrive.forward(0.6, 2.2);
             sleep((long)1000);
-            imuTurn.rotate(55, 0.5);
+            imuTurn.rotate(90, 0.2);
             timeDrive.backwards(0.6,0.9);
 
             sleep((long)100);
@@ -148,7 +149,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
             timeDrive.forward(0.6,0.9);
             sleep((long)1000);
-            imuTurn.rotate(-55, 0.5);
+            imuTurn.rotate(-90, 0.2);
             timeDrive.backwards(0.6,1.9);
 
             sleep((long)1000);
@@ -171,15 +172,15 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
             timeDrive.forward(0.6,0.6);
             sleep((long)1000);
-            imuTurn.rotate(-55, 0.4);
+            imuTurn.rotate(-90, 0.2);
             timeDrive.backwards(0.6,1.4);
 
             hdw.servoStoneAutonomous.setPosition(0);
             sleep((long)1000);
 
-            timeDrive.forward(0.6, 2.25);
+            timeDrive.forward(0.6, 2);
             sleep((long)1000);
-            imuTurn.rotate(55, 0.3);
+            imuTurn.rotate(90, 0.2);
             timeDrive.backwards(0.6,0.9);
 
             sleep((long)100);
@@ -188,7 +189,7 @@ public class AutonomoSkystoneRojo extends LinearOpMode {
 
             timeDrive.forward(0.6,1.2);
             sleep((long)1000);
-            imuTurn.rotate(-55, 0.3);
+            imuTurn.rotate(-90, 0.2);
             timeDrive.backwards(0.6,1.9);
 
             sleep((long)1000);

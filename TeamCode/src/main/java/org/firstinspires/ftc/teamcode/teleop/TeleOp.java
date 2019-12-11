@@ -84,6 +84,12 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
             hdw.motorIntakeRight.setPower(0);
         }
 
+        if(gamepad2.dpad_up){
+            hdw.servoCapstone.setPosition(1);
+        }else if (gamepad2.dpad_down){
+            hdw.servoCapstone.setPosition(0);
+        }
+
         //servo para arrastrar las stones
         if(gamepad2.y){
             hdw.servoStoneAutonomous.setPosition(0);
