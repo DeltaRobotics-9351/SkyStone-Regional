@@ -29,24 +29,31 @@ public class AutonomoFoundationRojo extends LinearOpMode {
         //esperamos que el usuario presione <play> en la driver station
         waitForStart();
 
+        timeDrive.strafeRight(1, 0.5); //nos deslizamos
+
         timeDrive.forward(1, 0.2); //nos agitamos para bajar el intake
-        timeDrive.backwards(1, 0.2);
-        timeDrive.forward(1, 0.2);
         timeDrive.backwards(1, 0.2);
 
         hdw.motorSliders.setPower(1); //subimos los sliders
-        sleep(800);
+        sleep(600);
         hdw.motorSliders.setPower(0);
 
-        timeDrive.forward(0.8,1.2); //avanzamos hacia la foundation
+        timeDrive.forward(0.8,0.9); //avanzamos hacia la foundation
 
         hdw.motorSliders.setPower(-1); //bajamos los sliders
-        sleep(800);
+        sleep(600);
         hdw.motorSliders.setPower(0);
         sleep(500);
 
-        timeDrive.backwards(1, 1);// vamos hacia atras para jalar la foundation
-        timeDrive.strafeLeft(0.5, 4); //nos deslizamos para estacionarnos abajo del skybridge
+        timeDrive.backwards(1, 1.3); // vamos hacia atras para jalar la foundation
+
+        hdw.motorSliders.setPower(1); //subimos los sliders
+        sleep(600);
+        hdw.motorSliders.setPower(0);
+
+        sleep(16000);
+
+        timeDrive.strafeLeft(0.4, 3.3); //nos deslizamos para estacionarnos abajo del skybridge
 
     }
 

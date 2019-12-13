@@ -53,7 +53,8 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
             telemetry.addData("wheelBackRightPower", mecanumWheels.wheelBackRightPower);
             telemetry.addData("wheelBackLeftPower", mecanumWheels.wheelBackLeftPower);
             telemetry.addData("wheels turbo", mecanumWheels.turbo);
-            telemetry.addData("intake power", hdw.motorIntakeRight.getPower());
+            telemetry.addData("intake power right", hdw.motorIntakeRight.getPower());
+            telemetry.addData("intake power left", hdw.motorIntakeLeft.getPower());
             telemetry.addData("servoStoneAutonomous position", hdw.servoStoneAutonomous.getPosition());
 
             telemetry.update();  //manda los mensajes telemetry a la driver station
@@ -66,9 +67,9 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
         //de velocidad. el fin de esto es para que el arrastrar la foundation en el endgame no sea
         //tan arriesgado y haya menos probabilidad de que tiremos cualquier stone
         if (gamepad1.left_trigger > 0.2) {
-            mecanumWheels.joystick(gamepad1, Range.clip(gamepad1.left_trigger, 0,0.5));
+            mecanumWheels.joystick(gamepad1,  1 - Range.clip(gamepad1.left_trigger, 0,0.7));
         }else if(gamepad1.right_trigger > 0.2){
-            mecanumWheels.joystick(gamepad1, Range.clip(gamepad1.right_trigger, 0,0.5));
+            mecanumWheels.joystick(gamepad1, 1 -  Range.clip(gamepad1.right_trigger, 0,0.7));
         } else {
             mecanumWheels.joystick(gamepad1, 1);
         }
@@ -79,19 +80,23 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
         //intake
         if (gamepad2.a) {
             if (gamepad1.left_trigger > 0.2) {
-                hdw.motorIntakeLeft.setPower(Range.clip(gamepad2.left_trigger, 0.5,1));
-                hdw.motorIntakeRight.setPower(Range.clip(gamepad2.left_trigger, 0.5,1));
+                double minusPower = Range.clip(gamepad2.left_trigger, 0,0.5);
+                hdw.motorIntakeLeft.setPower(1 - minusPower);
+                hdw.motorIntakeRight.setPower(1 - minusPower);
             }else{
-                hdw.motorIntakeLeft.setPower(Range.clip(gamepad2.right_trigger,0.5,1));
-                hdw.motorIntakeRight.setPower(Range.clip(gamepad2.right_trigger,0.5,1));
+                double minusPower = Range.clip(gamepad2.right_trigger, 0,0.5);
+                hdw.motorIntakeLeft.setPower(1 - minusPower);
+                hdw.motorIntakeRight.setPower(1 - minusPower);
             }
         } else if (gamepad2.b) {
             if (gamepad1.left_trigger > 0.1) {
-                hdw.motorIntakeLeft.setPower(-Range.clip(gamepad2.left_trigger,0.5,1));
-                hdw.motorIntakeRight.setPower(-Range.clip(gamepad2.left_trigger,0.5,1));
+                double minusPower = Range.clip(gamepad2.left_trigger, 0,0.5);
+                hdw.motorIntakeLeft.setPower(-1 +  minusPower);
+                hdw.motorIntakeRight.setPower(-1 +  minusPower);
             }else{
-                hdw.motorIntakeLeft.setPower(-Range.clip(gamepad2.right_trigger,0.5,1));
-                hdw.motorIntakeRight.setPower(-Range.clip(gamepad2.right_trigger,0.5,1));
+                double minusPower = Range.clip(gamepad2.right_trigger, 0,0.5);
+                hdw.motorIntakeLeft.setPower(-1 +  minusPower);
+                hdw.motorIntakeRight.setPower(-1 +  minusPower);
             }
         }else{
             hdw.motorIntakeLeft.setPower(0);
@@ -108,7 +113,7 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
         if(gamepad2.y){
             hdw.servoStoneAutonomous.setPosition(0);
         }else if(gamepad2.x){
-            hdw.servoStoneAutonomous.setPosition(0.6);
+            hdw.servoStoneAutonomous.setPosition(0.4);
         }
 
         //slider del intake

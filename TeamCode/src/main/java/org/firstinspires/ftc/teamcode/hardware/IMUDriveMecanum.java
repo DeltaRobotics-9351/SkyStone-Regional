@@ -6,6 +6,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.AngleDirection;
+import org.firstinspires.ftc.teamcode.OpModeStatus;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -25,9 +26,12 @@ public class IMUDriveMecanum {
 
     Telemetry telemetry;
 
-    public IMUDriveMecanum(Hardware hdw, Telemetry telemetry){
+    OpModeStatus status;
+
+    public IMUDriveMecanum(Hardware hdw, Telemetry telemetry, OpModeStatus status){
         this.hdw = hdw;
         this.telemetry = telemetry;
+        this.status = status;
     }
 
     public void initIMU(){
@@ -110,20 +114,20 @@ public class IMUDriveMecanum {
         // rotaremos hasta que se complete la vuelta
         if (degrees < 0)
         {
-            while (getAngle() == 0) { //al girar a la derecha necesitamos salirnos de 0 grados primero
+            while (getAngle() == 0 && status.opModeIsActive) { //al girar a la derecha necesitamos salirnos de 0 grados primero
                 telemetry.addData("imuAngle", getAngle());
                 telemetry.addData("degreesDestino", degrees);
                 telemetry.update();
             }
 
-            while (getAngle() > degrees) { //entramos en un bucle hasta que los degrees sean los esperados
+            while (getAngle() > degrees && status.opModeIsActive) { //entramos en un bucle hasta que los degrees sean los esperados
                 telemetry.addData("imuAngle", getAngle());
                 telemetry.addData("degreesDestino", degrees);
                 telemetry.update();
             }
         }
         else
-            while (getAngle() < degrees) { //entramos en un bucle hasta que los degrees sean los esperados
+            while (getAngle() < degrees && status.opModeIsActive) { //entramos en un bucle hasta que los degrees sean los esperados
                 telemetry.addData("imuAngle", getAngle());
                 telemetry.addData("degreesDestino", degrees);
                 telemetry.update();
