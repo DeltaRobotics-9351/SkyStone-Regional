@@ -98,14 +98,14 @@ public class AutonomoSkystoneAzul extends LinearOpMode {
 
         if(pattern == 2){ //este falta el ultimo skystone
 
-            timeDrive.strafeLeft(0.6, 0.4);
+            timeDrive.strafeLeft(0.6, 0.8);
 
             sleep(500);
 
             timeDrive.backwards(0.6,0.9);
 
             sleep((long)100);
-            hdw.servoStoneAutonomous.setPosition(0.4f);
+            hdw.servoStoneAutonomous.setPosition(0.5f);
             sleep((long)1000);
 
             timeDrive.forward(0.6,0.6);
@@ -122,7 +122,7 @@ public class AutonomoSkystoneAzul extends LinearOpMode {
             timeDrive.backwards(0.6,0.9);
 
             sleep((long)100);
-            hdw.servoStoneAutonomous.setPosition(0.4f);
+            hdw.servoStoneAutonomous.setPosition(0.5f);
             sleep((long)1000);
 
             timeDrive.forward(0.6,0.6);
@@ -136,12 +136,16 @@ public class AutonomoSkystoneAzul extends LinearOpMode {
 
             timeDrive.forward(0.6,0.4);
 
+            sleep((long)100);
+            hdw.servoStoneAutonomous.setPosition(0.5f);
+            sleep((long)1000);
+
         }else if(pattern == 3){ //este ya esta
 
             timeDrive.backwards(0.6,0.9);
 
             sleep((long)100);
-            hdw.servoStoneAutonomous.setPosition(0.4f);
+            hdw.servoStoneAutonomous.setPosition(0.5f);
             sleep((long)1000);
 
             timeDrive.forward(0.6,0.6);
@@ -152,13 +156,13 @@ public class AutonomoSkystoneAzul extends LinearOpMode {
             hdw.servoStoneAutonomous.setPosition(0);
             sleep((long)1000);
 
-            timeDrive.forward(0.6, 2.5); //hacia el ultimo skystone
+            timeDrive.forward(0.6, 2.4); //hacia el ultimo skystone
             sleep((long)1000);
             imuTurn.rotate(-55, 0.5);
             timeDrive.backwards(0.6,0.9);
 
             sleep((long)100);
-            hdw.servoStoneAutonomous.setPosition(0.4f);
+            hdw.servoStoneAutonomous.setPosition(0.5f);
             sleep((long)1000);
 
             timeDrive.forward(0.6,0.9);
@@ -172,7 +176,11 @@ public class AutonomoSkystoneAzul extends LinearOpMode {
 
             timeDrive.forward(0.6,0.3);
 
-        }else if(pattern == 1){ //este es el que falta timmy
+            sleep((long)100);
+            hdw.servoStoneAutonomous.setPosition(0.5f);
+            sleep((long)1000);
+
+        }else if(pattern == 1){
 
             timeDrive.strafeLeft(0.3, 1.1);
 
@@ -181,7 +189,7 @@ public class AutonomoSkystoneAzul extends LinearOpMode {
             timeDrive.backwards(0.6,1.1);
 
             sleep((long)100);
-            hdw.servoStoneAutonomous.setPosition(0.4f);
+            hdw.servoStoneAutonomous.setPosition(0.5f);
             sleep((long)1000);
 
             timeDrive.forward(0.6,0.6);
@@ -198,7 +206,7 @@ public class AutonomoSkystoneAzul extends LinearOpMode {
             timeDrive.backwards(0.6,0.9);
 
             sleep((long)100);
-            hdw.servoStoneAutonomous.setPosition(0.4f);
+            hdw.servoStoneAutonomous.setPosition(0.5f);
             sleep((long)1000);
 
             timeDrive.forward(0.6,1.2);
@@ -211,6 +219,10 @@ public class AutonomoSkystoneAzul extends LinearOpMode {
             sleep((long)1000);
 
             timeDrive.forward(0.6,0.5);
+
+            sleep((long)100);
+            hdw.servoStoneAutonomous.setPosition(0.5f);
+            sleep((long)1000);
 
         }else{
             //en teoria este codigo nunca se deberia de ejecutar, pero por si las dudas...

@@ -150,7 +150,7 @@ public class IMUDriveMecanum {
         globalAngle = 0;
     }
 
-    public double calculateDeltaBetweenAngles(double angle1, double angle2){
+    public double calculateDeltaAngles(double angle1, double angle2){
         double deltaAngle = angle1 - angle2;
 
         if (deltaAngle < -180)
@@ -174,7 +174,7 @@ public class IMUDriveMecanum {
             double frontleft = power, frontright = -power, backleft = -power, backright = power;
 
             if(getAngle() < initialAngle){
-                double deltaAngle = calculateDeltaBetweenAngles(initialAngle, getAngle());
+                double deltaAngle = calculateDeltaAngles(initialAngle, getAngle());
 
                 double counteractConstant = 0.1;
                 double counteractValue = deltaAngle * counteractConstant;
@@ -193,7 +193,7 @@ public class IMUDriveMecanum {
                 telemetry.update();
 
             }else if(getAngle() > initialAngle){
-                double deltaAngle = calculateDeltaBetweenAngles(initialAngle, getAngle());
+                double deltaAngle = calculateDeltaAngles(initialAngle, getAngle());
 
                 double counteractConstant = 0.2;
                 double counteractValue = deltaAngle * counteractConstant;

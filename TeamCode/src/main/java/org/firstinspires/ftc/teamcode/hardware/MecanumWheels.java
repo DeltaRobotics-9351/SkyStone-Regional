@@ -14,7 +14,9 @@ public class MecanumWheels {
 
     public double turbo = 0;
 
-    public MecanumWheels(){ }
+    public Hardware hdw;
+
+    public MecanumWheels(Hardware hdw){ this.hdw = hdw; }
 
     //el codigo de estas llantas mecanum esta basado en "Quetzalcoatl"
     //que se encuentra en https://github.com/Berdehacks/Quetzalcoatl/
@@ -46,6 +48,11 @@ public class MecanumWheels {
         wheelBackRightPower  *= turbo;
         wheelFrontLeftPower  *= turbo;
         wheelBackLeftPower   *= turbo;
+
+        hdw.wheelFrontRight.setPower(wheelFrontRightPower);
+        hdw.wheelFrontLeft.setPower(wheelFrontLeftPower);
+        hdw.wheelBackRight.setPower(wheelBackRightPower);
+        hdw.wheelBackLeft.setPower(wheelBackLeftPower);
     }
 
 }

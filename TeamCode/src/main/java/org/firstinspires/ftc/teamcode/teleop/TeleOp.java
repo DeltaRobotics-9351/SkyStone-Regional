@@ -23,7 +23,7 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
         hdw = new Hardware(hardwareMap); //init hardware
         hdw.initHardware(false);
 
-        mecanumWheels = new MecanumWheels();
+        mecanumWheels = new MecanumWheels(hdw);
         telemetry.addData("[>]", "All set?"); //manda un mensaje a la driver station
         telemetry.update();
 
@@ -39,12 +39,6 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
             }
 
             startA(); //movimientos del start A
-
-            //set power de los motores
-            hdw.wheelFrontRight.setPower(mecanumWheels.wheelFrontRightPower);
-            hdw.wheelFrontLeft.setPower(mecanumWheels.wheelFrontLeftPower);
-            hdw.wheelBackRight.setPower(mecanumWheels.wheelBackRightPower);
-            hdw.wheelBackLeft.setPower(mecanumWheels.wheelBackLeftPower);
 
             startB();//movimientos del start B
 
@@ -79,24 +73,30 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
     public void startB() {
         //intake
         if (gamepad2.a) {
-            if (gamepad1.left_trigger > 0.2) {
-                double minusPower = Range.clip(gamepad2.left_trigger, 0,0.5);
+            if (gamepad2.left_trigger > 0.1) {
+                double minusPower = Range.clip(gamepad2.left_trigger, 0,0.4);
+                hdw.motorIntakeLeft.setPower(1 - minusPower);
+                hdw.motorIntakeRight.setPower(1 - minusPower);
+            }else if (gamepad2.right_trigger > 0.1){
+                double minusPower = Range.clip(gamepad2.right_trigger, 0,0.4);
                 hdw.motorIntakeLeft.setPower(1 - minusPower);
                 hdw.motorIntakeRight.setPower(1 - minusPower);
             }else{
-                double minusPower = Range.clip(gamepad2.right_trigger, 0,0.5);
-                hdw.motorIntakeLeft.setPower(1 - minusPower);
-                hdw.motorIntakeRight.setPower(1 - minusPower);
+                hdw.motorIntakeLeft.setPower(1);
+                hdw.motorIntakeRight.setPower(1);
             }
         } else if (gamepad2.b) {
-            if (gamepad1.left_trigger > 0.1) {
-                double minusPower = Range.clip(gamepad2.left_trigger, 0,0.5);
+            if (gamepad2.left_trigger > 0.1) {
+                double minusPower = Range.clip(gamepad2.left_trigger, 0,0.4);
+                hdw.motorIntakeLeft.setPower(-1 +  minusPower);
+                hdw.motorIntakeRight.setPower(-1 +  minusPower);
+            }else if (gamepad2.right_trigger > 0.1){
+                double minusPower = Range.clip(gamepad2.right_trigger, 0,0.4);
                 hdw.motorIntakeLeft.setPower(-1 +  minusPower);
                 hdw.motorIntakeRight.setPower(-1 +  minusPower);
             }else{
-                double minusPower = Range.clip(gamepad2.right_trigger, 0,0.5);
-                hdw.motorIntakeLeft.setPower(-1 +  minusPower);
-                hdw.motorIntakeRight.setPower(-1 +  minusPower);
+                hdw.motorIntakeLeft.setPower(-1);
+                hdw.motorIntakeRight.setPower(-1);
             }
         }else{
             hdw.motorIntakeLeft.setPower(0);
@@ -106,32 +106,26 @@ public class TeleOp extends LinearOpMode { //la clase extendera a otra llamada '
         if(gamepad2.dpad_up){
             hdw.servoCapstone.setPosition(1);
         }else if (gamepad2.dpad_down){
-            hdw.servoCapstone.setPosition(0);
+            hdw.servoCapstone.setPosition(0.25);
         }
 
         //servo para arrastrar las stones
         if(gamepad2.y){
             hdw.servoStoneAutonomous.setPosition(0);
         }else if(gamepad2.x){
-            hdw.servoStoneAutonomous.setPosition(0.4);
+            hdw.servoStoneAutonomous.setPosition(0.5);
         }
 
         //slider del intake
         //invertimos el valor del joystick ya que por alguna razon esta invertida por default.
         if(-gamepad2.left_stick_y > 0.1 || -gamepad2.left_stick_y < -0.1) {
             hdw.motorSliders.setPower(-gamepad2.left_stick_y);
+        }else if(-gamepad2.right_stick_y > 0.1 || -gamepad2.right_stick_y < -0.1){
+            hdw.motorSliders.setPower(-gamepad2.right_stick_y);
         }else{
             hdw.motorSliders.setPower(0);
         }
 
     }
-
-    //invertir un valor que va de 0-1
-    public double invertValue(double value, double clipMax, double clipMin){
-        value = Range.clip(value, clipMin, clipMax);
-        return clipMax - value;
-    }
-
-
 
 }

@@ -53,7 +53,14 @@ public class AutonomoFoundationRojo extends LinearOpMode {
 
         sleep(16000);
 
-        timeDrive.strafeLeft(0.4, 3.3); //nos deslizamos para estacionarnos abajo del skybridge
+        timeDrive.strafeLeft(0.4, 2.5); //nos deslizamos para estacionarnos abajo del skybridge
+
+        hdw.motorSliders.setPower(-1); //bajamos los sliders
+        sleep(600);
+        hdw.motorSliders.setPower(0);
+        sleep(500);
+
+        timeDrive.strafeLeft(0.4, 1.65); //nos deslizamos para estacionarnos abajo del skybridge
 
     }
 
